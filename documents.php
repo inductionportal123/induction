@@ -73,12 +73,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                     <i class="fas fa-file-upload mr-2"></i> Upload Documents | دستاویزات اپ لوڈ کریں
                 </h3>
 
-                <!-- Deadline Closed Notice -->
-                <div class="text-center bg-red-600 text-white p-4 rounded-lg shadow-lg mb-6">
-                    <h1 class="font-bold text-xl mb-2">🚨 Date Closed</h1>
-                    <p class="text-base">The deadline has passed. The date for submission has closed.</p>
-                </div>
-
+            
                 <?php if (!$ro2) { ?>
                     <!-- Transaction Details Form -->
                     <form action="storeTransaction.php" method="POST" class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
