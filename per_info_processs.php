@@ -21,6 +21,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     $basic_status = mysqli_real_escape_string($conn, $_POST['basic_status']);
     $network = mysqli_real_escape_string($conn, $_POST['network']);
     $basic_phone = mysqli_real_escape_string($conn, $_POST['basic_phone']);
+    $disability = mysqli_real_escape_string($conn, $_POST['disability']);
     $basic_mobile = mysqli_real_escape_string($conn, $_POST['basic_mobile']);
     $basic_cnic = mysqli_real_escape_string($conn, $_POST['basic_cnic']);
     $basic_email = mysqli_real_escape_string($conn, $_POST['basic_email']);
@@ -80,7 +81,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             $basic_dob !== $existing_data['per_info']['basic_dob'] ||
             $basic_domicile !== $existing_data['per_info']['basic_domicile'] ||
             $basic_status !== $existing_data['per_info']['basic_marital_status'] ||
-            $basic_cnic !== $existing_data['per_info']['contact_cnic']
+            $basic_cnic !== $existing_data['per_info']['contact_cnic'] ||
+            $disability !== $existing_data['per_info']['disability'] ||
         )
     ) {
         $has_changes = true;
@@ -146,6 +148,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             basic_dob = '$basic_dob',
             basic_domicile = '$basic_domicile',
             basic_marital_status = '$basic_status',
+            basic_status = '$disability',
             contact_cnic = '$basic_cnic'
             WHERE said = '$userid'";
         $exe_per_info = mysqli_query($conn, $query_update_per_info);
@@ -246,7 +249,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         // Insert into per_info
         $query_insert_per_info = "INSERT INTO per_info (
             basic_full_name, basic_father_name, basic_gender, basic_dob, 
-            basic_domicile, basic_marital_status, contact_cnic, said
+            basic_domicile, basic_marital_status,disability, contact_cnic, said
         ) VALUES (
             '$basic_full_name', '$basic_father_name', '$basic_gender', '$basic_dob', 
             '$basic_domicile', '$basic_status', '$basic_cnic', '$userid'

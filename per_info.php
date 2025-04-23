@@ -47,6 +47,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     $basics_domicile = '';
     $basics_status = '';
     $network = '';
+    $disability = '';
     $basics_contact_phone = '';
     $highest_qualification = '';
     $basics_mobile = '';
@@ -78,6 +79,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         $highest_qualification = $rows['highest_qualification'] ?? '';
         $basics_mobile = $rows['contact_mobile'] ?? '';
         $account_detail_cnic = $rows['contact_cnic'] ?? '';
+        $disability = $rows['disability'] ?? '';
         $account_detail_email = $rows['contact_email'] ?? '';
         $basics_district = $rows['contact_district'] ?? '';
         $basics_district_code = $rows['contact_district_code'] ?? '';
@@ -199,11 +201,12 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 
 
                         <div>
-                            <label class="form-label">disability if any  <span class="">*</span></label>
-                            <select class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" name="disability" id="disability" >
-                                <option value="">Select disability</option>
-                               <option value="0">No</option>
-                                 <option value="1">Yes</option>
+                            <?php echo "this".$disability ?>
+                            <label class="form-label">Disability (if any) <span class="required">*</span></label>
+                            <select class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" name="disability" id="disability" required>
+                                <option value="">Select Disability</option>
+                                <option value="0" <?php if ($disability == '0') echo 'selected'; ?>>No</option>
+                                <option value="1" <?php if ($disability == '1') echo 'selected'; ?>>Yes</option>
                             </select>
                         </div>
 
