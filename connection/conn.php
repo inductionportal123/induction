@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";  // or use 127.0.0.1
-$username = "tstind_induction_25";
-$password = "@#%$@#@#%$12345";
-$dbname = "tstind_induction_25";
+$username = "tstind_tstind_newinduction";
+$password = "newinduction!#%$@#$1234";
+$dbname = "tstind_newinduction";
 
 try {
     // Enable exception mode for mysqli

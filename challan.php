@@ -127,7 +127,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                     </tbody>
                                 </table>
                             </div>
-                            <p class="text-gray-600 mt-4">If your Total Fees is not zero (0), please download this challan form and submit the fees at any branch of the selected bank. Upload a scanned copy of the <strong>computerized receipt issued by the bank</strong> in the next tab along with your profile picture.</p>
+                            <p class="text-gray-600 mt-4">Please download this challan form and submit the fees at any branch of the selected bank. Upload a scanned copy of the <strong>computerized receipt issued by the bank</strong> in the next tab along with your profile picture.</p>
                             <p class="text-red-600 mt-2"><strong>Notice:</strong> The fee is neither refundable nor transferable for the next induction/other posts.</p>
 
                         <!-- Bank Selection and Download -->
