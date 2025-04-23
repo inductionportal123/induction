@@ -1,10 +1,5 @@
 <?php
 // Prevent any unwanted output
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 ob_start();
 include('connection/conn.php');
 
@@ -13,7 +8,7 @@ $name = isset($_POST['fname']) ? mysqli_real_escape_string($conn, $_POST['fname'
 $email = isset($_POST['mail']) ? mysqli_real_escape_string($conn, $_POST['mail']) : '';
 $c_no = isset($_POST['cnic']) ? mysqli_real_escape_string($conn, $_POST['cnic']) : '';
 $p_no = isset($_POST['pass']) ? mysqli_real_escape_string($conn, $_POST['pass']) : '';
-echo $name;
+
 // Validate inputs
 if (empty($name) || empty($email) || empty($c_no) || empty($p_no)) {
     ob_end_clean();
