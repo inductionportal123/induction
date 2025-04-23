@@ -201,7 +201,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 
 
                         <div>
-                            <label class="form-label">Disability (if any) <span class="required">*</span></label>
+                            <label class="form-label">Disability (if any) <span class="required"></span></label>
                             <select class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" name="disability" id="disability" required>
                                 <option value="">Select Disability</option>
                                 <option value="0" <?php if ($disability == '0') echo 'selected'; ?>>No</option>
