@@ -151,7 +151,6 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     <!-- Main Content -->
     <main class="p-8 pt-24 w-full max-w-7xl mx-auto md:ml-72">
         <div class="bg-white p-8 rounded-xl shadow-lg">
-        <?php include 'test.php'; ?>
 
             <!-- Advanced Navigation Tabs -->
             <?php include 'registration_form.php'; ?>
