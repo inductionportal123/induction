@@ -13,8 +13,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     $userid = $_SESSION['u_id'];
 
     // Use prepared statement to prevent SQL injection
-    $query = "SELECT pi.basic_full_name, pi.basic_father_name, pi.basic_gender, pi.basic_dob, 
-                     pi.basic_domicile, pi.basic_marital_status, pi.highest_qualification, pi.undertaking,
+    $query = "SELECT pi.basic_full_name, pi.basic_father_name, pi.basic_gender, pi.basic_dob, pi.disability,
+                     pi.basic_domicile, pi.basic_marital_status, pi.undertaking,
                      pic.network, pic.contact_phone_no, pic.contact_mobile, pic.contact_email, 
                      pic.contact_district, pic.contact_district_code, pic.contact_city, pic.contact_religion, 
                      pic.contact_postal_address, pic.contact_per_address, pi.contact_cnic,
@@ -196,6 +196,19 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                 ?>
                             </select>
                         </div>
+
+
+                        <div>
+                            <label class="form-label">disability if any  <span class="">*</span></label>
+                            <select class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" name="disability" id="disability" >
+                                <option value="">Select disability</option>
+                               <option value="0">No</option>
+                                 <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                        
+
                         <div>
     <label class="form-label">Marital Status <span class="required">*</span></label>
     <select class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" name="basic_status" id="basic_status" required>
