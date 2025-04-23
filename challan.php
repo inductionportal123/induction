@@ -148,12 +148,18 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                         <button type="submit" class="mt-4 px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-600 transition-all w-full">
                                             <i class="fas fa-download mr-2"></i> Download Challan Form
                                         </button>
-                                        <!-- Move Next Button -->
-        <a href="documents.php" class="mt-4 block px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all w-full text-center font-semibold nav-tab <?php echo $current_page === 'documents.php' ? 'active' : ''; ?>">
-            <i class="fas fa-file-upload mr-2"></i> Move to Next Step<br>
-            <span class="text-sm <?php echo $current_page === 'documents.php' ? 'text-teal-200' : 'text-teal-100'; ?>">دستاویزات اپ لوڈ کریں</span>
-        </a>
+                                      
                                     </form>
+                                </div>
+                            </div>
+
+                             <!-- Bank Selection and Download -->
+                             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                   <!-- Move Next Button -->
+        <a href="documents.php" class="mt-4 block px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all w-full text-center font-semibold nav-tab ">
+            <i class="fas fa-file-upload mr-2"></i> Move to Next Step<br>
+        </a>
                                 </div>
                             </div>
                 <?php
