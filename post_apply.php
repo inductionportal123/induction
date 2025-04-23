@@ -314,7 +314,7 @@ if ($qualirow > 0) {
                     <div class="space-y-6">
                         <!-- Scheduled Castes -->
                         <div class="flex items-center justify-between">
-                            <label class="form-label flex-1">Scheduled Castes, Buddhist Community, etc.</label>
+                            <label class="form-label flex-1">Scheduled Castes, Buddhist Community, Recognized Tribes of the Tribal Areas, Azad Kashmir, Gilgit Baltistan, AJK, Sindth (Rural), Balochistan Domiciled .</label>
                             <input type="checkbox" name="caste_age_relax" id="caste_age_relax" class="h-5 w-5" <?php echo isset($relax_schedule_caste_data) && $relax_schedule_caste_data == 1 ? 'checked' : ''; ?>>
                         </div>
 
@@ -352,7 +352,7 @@ if ($qualirow > 0) {
                         <!-- Disabled Person -->
                         <div>
                             <div class="flex items-center justify-between">
-                                <label class="form-label flex-1">Disabled Person (Specify Nature)</label>
+                                <label class="form-label flex-1">Disabled Person (Nature of Disability must be mentioned) </label>
                                 <input type="checkbox" name="diabled_age_relax" id="diabled_age_relax" class="h-5 w-5" <?php echo isset($relax_diabled_data) && $relax_diabled_data == 1 ? 'checked' : ''; ?>>
                             </div>
                             <div id="disabled-fields" class="mt-4 <?php echo isset($relax_diabled_data) && $relax_diabled_data == 1 ? '' : 'hidden'; ?>">
@@ -371,7 +371,7 @@ if ($qualirow > 0) {
                         <!-- Widow/Widower -->
                         <div>
                             <div class="flex items-center justify-between">
-                                <label class="form-label flex-1">Widow/Widower or Child of Govt Servant Died During Service</label>
+                                <label class="form-label flex-1">Widow/ Widower or Child of Govt Servant died during Service (on or after 01-07-2005) </label>
                                 <input type="checkbox" name="widow_age_relax" id="widow_age_relax" class="h-5 w-5" <?php echo isset($relax_widow_data) && $relax_widow_data == 1 ? 'checked' : ''; ?>>
                             </div>
                             <div id="widow-fields" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 <?php echo isset($relax_widow_data) && $relax_widow_data == 1 ? '' : 'hidden'; ?>">
@@ -395,7 +395,7 @@ if ($qualirow > 0) {
                         </div>
 
                         <!-- Government Employee -->
-                        <div>
+                        <!-- <div>
                             <div class="flex items-center justify-between">
                                 <label class="form-label flex-1">Government Employee (Currently Serving)</label>
                                 <input type="checkbox" name="gov_emp" id="gov_emp" class="h-5 w-5" <?php echo isset($gov_data) && $gov_data == 1 ? 'checked' : ''; ?>>
@@ -436,7 +436,7 @@ if ($qualirow > 0) {
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
