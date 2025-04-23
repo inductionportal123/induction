@@ -130,38 +130,37 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                             <p class="text-gray-600 mt-4">If your Total Fees is not zero (0), please download this challan form and submit the fees at any branch of the selected bank. Upload a scanned copy of the <strong>computerized receipt issued by the bank</strong> in the next tab along with your profile picture.</p>
                             <p class="text-red-600 mt-2"><strong>Notice:</strong> The fee is neither refundable nor transferable for the next induction/other posts.</p>
 
-                            <!-- Bank Selection and Download -->
-                            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <?php
-                                    $query2 = "SELECT * FROM `bank_fee` ORDER BY id ASC";
-                                    $exe2 = mysqli_query($conn, $query2);
-                                    ?>
-                                    <form action="challanprocess.php" method="post" target="_blank">
-                                        <label class="form-label mb-2">Select Your Bank</label>
-                                        <select name="bank" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" required>
-                                            <option value="">Select your bank</option>
-                                            <?php while ($datarows = mysqli_fetch_array($exe2)) { ?>
-                                                <option value="<?php echo $datarows['id']; ?>"><?php echo strtoupper($datarows['name']); ?></option>
-                                            <?php } ?>
-                                        </select>
-                                        <button type="submit" class="mt-4 px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-600 transition-all w-full">
-                                            <i class="fas fa-download mr-2"></i> Download Challan Form
-                                        </button>
-                                      
-                                    </form>
-                                </div>
-                            </div>
-
-                             <!-- Bank Selection and Download -->
-                             <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                   <!-- Move Next Button -->
-        <a href="documents.php" class="mt-4 block px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all w-full text-center font-semibold nav-tab ">
+                        <!-- Bank Selection and Download -->
+<div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+        <?php
+        // Define current page for active state
+        $current_page = basename($_SERVER['PHP_SELF']);
+        
+        $query2 = "SELECT * FROM `bank_fee` ORDER BY id ASC";
+        $exe2 = mysqli_query($conn, $query2);
+        ?>
+        <form action="challanprocess.php" method="post" target="_blank">
+            <label class="form-label mb-2">Select Your Bank</label>
+            <select name="bank" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" required>
+                <option value="">Select your bank</option>
+                <?php while ($datarows = mysqli_fetch_array($exe2)) { ?>
+                    <option value="<?php echo $datarows['id']; ?>"><?php echo strtoupper($datarows['name']); ?></option>
+                <?php } ?>
+            </select>
+            <button type="submit" class="mt-4 px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-600 transition-all w-full">
+                <i class="fas fa-download mr-2"></i> Download Challan Form
+            </button>
+        </form>
+    </div>
+    <div class="flex items-end">
+        <!-- Move Next Button -->
+        <a href="documents.php" class="mt-4 block px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all w-full text-center font-semibold nav-tab <?php echo $current_page === 'documents.php' ? 'active' : ''; ?>">
             <i class="fas fa-file-upload mr-2"></i> Move to Next Step<br>
+            <span class="text-sm <?php echo $current_page === 'documents.php' ? 'text-teal-200' : 'text-teal-100'; ?>">دستاویزات اپ لوڈ کریں</span>
         </a>
-                                </div>
-                            </div>
+    </div>
+</div>
                 <?php
                         }
                     }
