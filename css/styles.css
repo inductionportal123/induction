@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;600&display=swap');
+
+*{
+	font-family: 'Baloo Paaji 2', cursive;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style: none;
+	text-decoration: none;
+}
+
+body{
+	background: #f5f5f5;
+}
+
+.top_navbar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 60px;
+	background: #fff;
+	box-shadow: 1px 0 2px rgba(0,0,0,0.125);
+	display: flex;
+	align-items: center;
+	z-index: 1 !important;
+	overflow: hidden !important;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.top_navbar .logo{
+	width: 200px;
+	font-size: 25px;
+	font-weight: 600;
+	padding: 0 25px;
+	color: #007dc3;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	border-right: 1px solid #f5f5f5;
+}
+.top_navbar h3
+{
+    font-size: 24px;
+    font-weight: 700;
+    font-family: sans-serif;
+    color: #240e70;
+}
+.top_navbar .logo span{
+	font-weight: 400;
+}
+
+.top_navbar .menu{
+	width: calc(100% - 250px);
+	padding: 0 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.top_navbar .hamburger{
+	font-size: 25px;
+	cursor: pointer;
+	color: #005faf;
+}
+
+.top_navbar .hamburger:hover{
+	color: #007dc3;
+}
+
+.top_navbar .menu .profile_wrap{
+	padding-left: 25px;
+	border-left: 1px solid #f5f5f5;
+	
+}
+
+
+.top_navbar .menu .profile{
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.top_navbar .menu .profile .name{
+	margin: 0 15px;
+}
+
+/*.hover_collapse .sidebar{
+	width: 70px;
+}
+
+.hover_collapse .sidebar ul li a .text{
+	display: none;
+}*/
+
+.sidebar{
+	position: fixed;
+	top: 50px;
+	left: 0;
+	width: 220px;
+	height: 100%;
+	background: #005faf;
+}
+
+.sidebar ul li a{
+	display: block;
+	padding: 12px 25px;
+	border-bottom: 1px solid #0e94d4;
+	color: #fff;
+	transition: all 0.2s ease;
+	text-decoration: none;
+
+}
+
+.sidebar ul li a .icon{
+	font-size: 18px;
+	vertical-align: middle;
+	transition: background 0.2s ease;
+}
+
+.sidebar ul li a .text{
+	margin-left: 10px;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.sidebar ul li a:hover{
+	background: #0e94d4;
+	color: #fff;
+}
+
+/*.click_collapse .sidebar{
+	transition: all 0.2s ease;
+}*/
+
+.main_container{
+	margin-top: 60px;
+	margin-left: 215px;
+	padding: 25px;
+	width: calc(100% - 250px);
+}
+
+.main_container .content{
+	background: #fff;
+	padding: 25px;
+	margin-bottom: 25px;
+	text-align: justify;
+}
+
+/*.click_collapse .main_container{
+	width: calc(100% - 250px);
+	margin-left: 250px;
+	transition: all 0.2s ease;
+}*/
+.nav
+{
+	background: #e9f5ff;
+}
+.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active
+{
+	background-color: #005faf;
+}
+.tab-content
+{
+	border: 1px solid #e9f5ff;
+}
+.nav-pills .nav-link
+{
+	border-radius: 0px;
+}
+.heading
+{
+	font-family: Sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+}
+.nav-item
+{
+	font-size: 17px;
+	border-right: 1px solid grey;
+}
+.nav-pills>li+li
+{
+	margin-left: 0px;
+}
+select.form-control:not([size]):not([multiple]) 
+{
+	height: auto;
+}
+.tab-content select , h3 , h4 , input , h5 , textarea
+{
+	margin-bottom: 10px;
+}
+.tab-content select , h3 
+{
+	font-family: sans-serif;
+}
+.tab-content h5
+{
+	font-family: sans-serif;
+	font-size: 16px;
+}
+.bootstrap-select > .dropdown-toggle 
+{
+	z-index: 0;
+}
+.bootstrap-select.form-control
+{
+	margin-bottom: 15px;
+}
+.tab-content small
+{
+	font-size: 1.3rem;
+}
+.process-msg
+{
+	background: #d9edf6;
+	color: #377084;
+	border:1px solid #c8dce5;
+}
+.tab-content h6
+{
+	font-family: sans-serif;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	margin-bottom: 25px;
+	font-weight: bold;
+	font-style: inherit;
+
+
+}
+kbd
+{
+	background: #2d353c;
+	padding: 6px 10px;
+
+}
+#acadid td, #acadid th 
+{
+	border: 1px solid #00000042;
+}
+#acadid td
+{
+	text-align: center; 
+    vertical-align: middle;
+}
+#acadid th
+{
+	color: white;
+	background: #00933e;
+}
+#acadid small
+{
+	font-size: smaller;
+	display: block;
+}
+
+#profid td, #profid th 
+{
+	border: 1px solid #00000042;
+}
+#profid td
+{
+	text-align: center; 
+    vertical-align: middle;
+}
+#profid th
+{
+	color: white;
+	background: #00933e;
+}
+#profid small
+{
+	font-size: smaller;
+	display: block;
+}
+
+.fieldrequired
+{
+	font-size: 25px;
+	color: red;
+}
+
+.error-msg
+{
+	background: #f2dedf;
+	color: red;
+	border:1px solid #e7ced1;
+	padding: 6px;
+	margin-left: 10px;
+}
+
+.caret
+{
+	display: none;
+}

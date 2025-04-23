@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to FGEI (C/G) - Recruitment</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <!-- Custom CSS for animations -->
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-purple-50">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Logo -->
+        <nav class="flex justify-center mb-12">
+            <a href="index.php" class="floating">
+                <img src="images/logo.png" alt="FGEI Logo" class="w-40 h-auto">
+            </a>
+        </nav>
+
+        <!-- Modal for Instructions -->
+        <div id="myModal" class="modal fixed inset-0 z-50 hidden">
+            <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+            <div class="modal-container bg-white w-11/12 md:max-w-2xl mx-auto rounded-lg shadow-lg z-50 overflow-y-auto relative fade-in">
+                <div class="modal-content py-4 text-left px-6">
+                    <span class="close text-gray-600 float-right text-2xl cursor-pointer hover:text-gray-900">&times;</span>
+                    <div class="instructions-card">
+                        <h1 class="text-3xl font-bold text-purple-800 mb-4">Important Instructions</h1>
+                        <p class="text-gray-700 mb-6">Read the following points carefully before submission of form:</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-3">
+                            <li>Read the eligibility criteria published in the newspaper carefully and fill the form for the relevant post.</li>
+                            <li>Fill the application form properly with complete and correct information.</li>
+                            <li>Name, Father Name, and Date of Birth must be filled as per matriculation certificate.</li>
+                            <li>Enter SEQ number/account number before uploading challan.</li>
+                            <li>Upload challan form along with computerized receipts issued by the bank. Otherwise, the application will be rejected.</li>
+                            <li>After successfully uploading the challan, click on the Undertaking and Submit button to final submission of the application.</li>
+                            <li>Once the application is submitted, your profile will be locked, and no further changes can be made.</li>
+                            <li>Intimation regarding written test/interview will be uploaded on the induction portal.</li>
+                            <li>Frequently log in to your account to check the status of your application.</li>
+                            <li>Before final submission of the form, make sure your data is accurate.</li>
+                            <li>After successful submission of the application, the account will be locked, and no further changes can be made.</li>
+                            <li>FGEI Dte will not be responsible for any wrong information/entry by the candidate, and no fee will be refunded.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="text-center mt-8 fade-in">
+            <h1 class="text-5xl font-bold text-gray-800 mb-4">Welcome to FGEI (C/G) Job Portal</h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Join FGEI and contribute to creating an unparalleled educational system that empowers students to achieve independence, confidence, and academic success.
+            </p>
+        </div>
+
+        <!-- Alert Box -->
+        <div class="bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-6 mb-12 rounded-lg flex items-start fade-in">
+            <i class="ri-information-line text-3xl mr-4 text-blue-500"></i>
+            <div>
+                <p class="font-semibold text-lg">All updates will be shown on your portal. Please check it regularly for updates.</p>
+                <p class="mt-2"><strong>Test Schedule:</strong> Tentative date of the written test is <strong>23 Feb 2025 (Sunday)</strong>.</p>
+                <p class="mt-1">Roll number slip will be available on the candidate profile page (Portal) by <strong>18 February 2025</strong> (tentative).</p>
+            </div>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 fade-in">
+            <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
+                <i class="ri-earth-line text-5xl text-blue-500 mb-6"></i>
+                <h4 class="text-2xl font-semibold">Total Cities: <span class="counter" data-target="66">0</span></h4>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
+                <i class="ri-government-line text-5xl text-blue-500 mb-6"></i>
+                <h4 class="text-2xl font-semibold">Total Institutions: <span class="counter" data-target="358">0</span></h4>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
+                <i class="ri-team-line text-5xl text-blue-500 mb-6"></i>
+                <h4 class="text-2xl font-semibold">Employees: <span class="counter" data-target="12000">0</span>+</h4>
+            </div>
+        </div>
+
+        <!-- Cards Section -->
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6 mb-12 fade-in">
+            <a href="Advertisement-2025.pdf" target="_blank" class="text-decoration-none">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+                    <img src="images/advertise.png" class="w-20 h-20 mx-auto mb-4" alt="Advertisement">
+                    <p class="text-gray-700 font-medium text-lg">Advertisement</p>
+                </div>
+            </a>
+            <a href="#" id="myModalLink" class="text-decoration-none">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+                    <img src="images/instructions2.png" class="w-20 h-20 mx-auto mb-4" alt="Instructions">
+                    <p class="text-gray-700 font-medium text-lg">Instructions</p>
+                </div>
+            </a>
+            <a href="sy.jpg" target="_blank" class="text-decoration-none">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+                    <img src="images/syllabus.png" class="w-20 h-20 mx-auto mb-4" alt="Syllabus">
+                    <p class="text-gray-700 font-medium text-lg">Syllabus</p>
+                </div>
+            </a>
+            <a href="login.php" class="text-decoration-none">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+                    <img src="images/login.png" class="w-20 h-20 mx-auto mb-4" alt="Login">
+                    <p class="text-gray-700 font-medium text-lg">Sign In / Sign Up</p>
+                </div>
+            </a>
+            <a href="#" target="_blank" class="text-decoration-none">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center hover:shadow-xl transition-transform transform hover:scale-105">
+                    <img src="images/syllabus.png" class="w-20 h-20 mx-auto mb-4" alt="Test Schedule">
+                    <p class="text-gray-700 font-medium text-lg">Test Schedule</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- JavaScript for Modal and Counters -->
+    <script>
+        // Modal Logic
+        const modal = document.getElementById("myModal");
+        const modalLink = document.getElementById("myModalLink");
+        const closeBtn = modal.querySelector(".close");
+
+        modalLink.onclick = () => modal.classList.remove("hidden");
+        closeBtn.onclick = () => modal.classList.add("hidden");
+        window.onclick = (event) => {
+            if (event.target == modal) modal.classList.add("hidden");
+        };
+
+        // Counter Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const counters = document.querySelectorAll('.counter');
+            const speed = 200;
+
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+
+                updateCount();
+            });
+        });
+    </script>
+</body>
+</html>

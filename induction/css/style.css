@@ -1,0 +1,98 @@
+:root{
+    --max-width: 1200px;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+.main-container {
+    background: rgb(228 255 228 / 23%);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(3.1px);
+    -webkit-backdrop-filter: blur(3.1px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+
+}
+
+a{
+    text-decoration: none;
+}
+
+.logo img{
+    max-width: 144px;
+}
+
+.intro h1{
+    font-size: 2.3rem;
+    font-weight: 700;
+    font-family: sans-serif;
+    color: #240e70;
+}
+
+.intro p{
+    font-size: 18px;
+    padding: 1rem;
+}
+.info-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.ri-earth-line, .ri-government-line, .ri-team-line{
+    font-size: 70px;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+ 
+
+
+          body {
+            background-color:#2596be;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff; /* Ensure text is visible over the background */
+        }
+        .card {
+            cursor: pointer;
+            background-color: #206fb1;
+            color:#fff!important;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .card:hover {
+            background-color: #4cae4c;
+            transform: scale(1.05);
+        }
+        .card-text {
+            color: #fff!important;
+            font-size: 1.2rem;
+        }
+        .profile-img {
+         
+            width: 100px;
+            height: 100px; 
+            object-fit: cover; 
+            
+            
+        }
+        i{
+    color: floralwhite!important;
+}
+

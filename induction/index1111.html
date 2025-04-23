@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FGEI Jo Portal</title>
+    <style>
+        :root {
+            --primary-color: #007bff;
+            --button-hover-color: #0056b3;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .heading {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .message {
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: var(--button-hover-color);
+            border-color: var(--button-hover-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Welcome to FGEI Job Portal</h1>
+        <p class="message">Please read the advertisement and instructions carefully before applying.</p>
+        <div class="button-container">
+            <button class="button">Advertisement</button>
+            <button class="button">Instructions</button>
+            <a href="#" class="button">Sign In/Sign Up</a>
+        </div>
+    </div>
+</body>
+</html>

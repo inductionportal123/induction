@@ -1,0 +1,83 @@
+[17-Feb-2025 03:40:12 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for db1.example.com failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 03:40:51 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for db1.example.com failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 03:41:08 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for db1.example.com failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 03:41:15 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for db1.example.com failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 03:53:57 UTC] PHP Warning:  Undefined array key "id" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:53:57 UTC] PHP Warning:  Undefined array key "name" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:54:25 UTC] PHP Warning:  Undefined array key "id" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:54:25 UTC] PHP Warning:  Undefined array key "name" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:55:06 UTC] PHP Warning:  Undefined array key "name" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:55:06 UTC] PHP Warning:  Undefined array key "name" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:55:06 UTC] PHP Warning:  Undefined array key "name" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:55:06 UTC] PHP Warning:  Undefined array key "name" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 03:55:06 UTC] PHP Warning:  Undefined array key "name" in /home/inductionfgeigov/public_html/connection/newconn.php on line 56
+[17-Feb-2025 05:20:38 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 24
+[17-Feb-2025 05:20:38 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 32
+[17-Feb-2025 05:40:40 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:40:40 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 05:40:59 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 37
+[17-Feb-2025 05:40:59 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 45
+[17-Feb-2025 05:41:08 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 32
+[17-Feb-2025 05:41:08 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 40
+[17-Feb-2025 05:56:56 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:56:56 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 05:57:44 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:57:44 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 05:58:24 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:58:24 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 05:59:11 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:59:11 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 05:59:16 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:59:16 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 05:59:17 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:59:17 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 05:59:17 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 05:59:17 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 06:00:08 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 25
+[17-Feb-2025 06:00:08 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 33
+[17-Feb-2025 06:01:50 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 24
+[17-Feb-2025 06:01:50 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 32
+[17-Feb-2025 06:02:14 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 24
+[17-Feb-2025 06:02:14 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 32
+[17-Feb-2025 06:02:26 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 30
+[17-Feb-2025 06:02:26 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 38
+[17-Feb-2025 06:09:07 UTC] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for p failed: Name or service not known in /home/inductionfgeigov/public_html/connection/newconn.php on line 37
+[17-Feb-2025 06:16:03 UTC] PHP Warning:  Array to string conversion in /home/inductionfgeigov/public_html/connection/newconn.php on line 35
+[17-Feb-2025 06:17:14 UTC] PHP Warning:  Undefined variable $conn in /home/inductionfgeigov/public_html/connection/newconn.php on line 40
+[17-Feb-2025 06:39:08 UTC] PHP Parse error:  syntax error, unexpected floating-point number ".229", expecting ")" in /home/inductionfgeigov/public_html/connection/newconn.php on line 27
+[17-Feb-2025 06:39:29 UTC] PHP Parse error:  syntax error, unexpected floating-point number ".229", expecting ")" in /home/inductionfgeigov/public_html/connection/newconn.php on line 27
+[17-Feb-2025 06:41:19 UTC] PHP Warning:  Undefined array key 3 in /home/inductionfgeigov/public_html/connection/newconn.php on line 27
+[17-Feb-2025 06:41:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 30
+[17-Feb-2025 06:41:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 30
+[17-Feb-2025 06:41:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 30
+[17-Feb-2025 06:41:19 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 30
+[17-Feb-2025 06:43:04 UTC] PHP Warning:  Undefined array key 3 in /home/inductionfgeigov/public_html/connection/newconn.php on line 26
+[17-Feb-2025 06:43:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 06:43:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 06:43:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 06:43:04 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:03:54 UTC] PHP Warning:  Undefined array key 3 in /home/inductionfgeigov/public_html/connection/newconn.php on line 26
+[17-Feb-2025 07:03:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:03:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:03:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:03:54 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:29 UTC] PHP Warning:  Undefined array key 3 in /home/inductionfgeigov/public_html/connection/newconn.php on line 26
+[17-Feb-2025 07:05:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:29 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:33 UTC] PHP Warning:  Undefined array key 3 in /home/inductionfgeigov/public_html/connection/newconn.php on line 26
+[17-Feb-2025 07:05:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:33 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:52 UTC] PHP Warning:  Undefined array key 3 in /home/inductionfgeigov/public_html/connection/newconn.php on line 26
+[17-Feb-2025 07:05:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:05:52 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:06:14 UTC] PHP Warning:  Undefined array key 3 in /home/inductionfgeigov/public_html/connection/newconn.php on line 26
+[17-Feb-2025 07:06:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:06:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:06:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29
+[17-Feb-2025 07:06:14 UTC] PHP Warning:  Trying to access array offset on value of type null in /home/inductionfgeigov/public_html/connection/newconn.php on line 29

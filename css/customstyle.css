@@ -1,0 +1,111 @@
+@media only screen and (max-width: 575.98px) {
+  .top_navbar {
+    padding: 5px;
+  }
+
+  .top_navbar p {
+    font-size: 15px;
+  }
+
+  #logo {
+    width: 60px !important;
+    height: 69px !important;
+  }
+
+  .heading {
+    padding-top: 14px;
+  }
+
+  h4 {
+    font-size: 13px;
+  }
+
+  .col-xs-6 {
+    margin-left: 2px;
+  }
+  h5 {
+    font-size: 14px;
+    text-align: left !important;
+  }
+  .form-control {
+    width: 100%;
+  }
+  input#signup_submit {
+    margin-left: -64px !important;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767.98px) {
+  .top_navbar p {
+    font-size: 16px;
+  }
+
+  .heading {
+    padding-top: 14px;
+  }
+
+  h4 {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+  .top_navbar p {
+    font-size: 18px;
+  }
+
+  .heading {
+    padding-top: 16px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+  .form-control {
+    width: 214%;
+  }
+  input#signup_submit {
+    margin-left: -47px !important;
+  }
+}
+
+@media only screen and (min-width: 120px) and (max-width: 260px) {
+  .top_navbar {
+    padding: 5px;
+  }
+
+  .top_navbar p {
+    font-size: 15px;
+  }
+
+  #logo {
+    width: 60px !important;
+    height: 69px !important;
+  }
+
+  .heading {
+    padding-top: 14px;
+  }
+
+  h4 {
+    font-size: 13px;
+  }
+
+  .col-xs-6 {
+    margin-left: 1px;
+  }
+  h5 {
+    font-size: 14px;
+    text-align: left !important;
+  }
+  .form-control {
+    width: 105%;
+  }
+  input#signup_submit {
+    margin-left: -47px !important;
+  }
+
+  .main_container {
+    margin-left: 2%;
+  }
+}

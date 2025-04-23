@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Mode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb", /* Blue */
+                        accent: "#f97316", /* Orange */
+                        gray: "#6b7280", /* Neutral Gray */
+                        light: "#f9fafb", /* Background Gray */
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="bg-light text-gray font-sans min-h-screen flex items-center justify-center p-6">
+    <div class="bg-white rounded-2xl shadow-lg max-w-lg w-full p-8 md:p-12 text-center">
+        <!-- Logo or Icon -->
+        <div class="flex justify-center mb-6">
+            <svg class="w-16 h-16 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m4 4v-4a2 2 0 10-4 0v4m-4 4h16a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-3xl font-bold text-primary mb-4">We'll Be Back Soon</h1>
+
+        <!-- Description -->
+        <p class="text-gray text-lg mb-6">
+            Our website is currently undergoing scheduled maintenance. We’re working hard to improve your experience and will be back online shortly.
+        </p>
+
+        <!-- Notify Button -->
+        <button class="bg-primary text-white py-3 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300">
+            Notify Me When Ready
+        </button>
+
+        <!-- Footer -->
+        <div class="mt-8 text-sm text-gray-500">
+            <p>&copy; 2025 Your Company Name. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
