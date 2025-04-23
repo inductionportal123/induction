@@ -148,7 +148,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 
                     <!-- Category I: Teaching -->
                     <div class="mb-6">
-                        <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS 6-15) | زمرہ I: تدریسی عملہ</h4>
+                        <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS 16-17) | زمرہ I: تدریسی عملہ</h4>
                         <?php
                         $quali = "SELECT * FROM `qualification` WHERE `said` = '$userid'";
                         $exequali = mysqli_query($conn, $quali);

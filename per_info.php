@@ -147,6 +147,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 <body class="bg-stone-50 font-sans antialiased">
     <?php include 'header.php'; ?>
     <?php include 'sidebar.php'; ?>
+
+    <?php include 'test.php'; ?>
     <!-- Main Content -->
     <main class="p-8 pt-24 w-full max-w-7xl mx-auto md:ml-72">
         <div class="bg-white p-8 rounded-xl shadow-lg">
