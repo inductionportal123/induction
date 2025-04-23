@@ -73,11 +73,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                     <i class="fas fa-handshake mr-2"></i> Undertaking | انڈرٹیکنگ
                 </h3>
 
-                <!-- Deadline Closed Notice -->
-                <div class="text-center bg-red-600 text-white p-4 rounded-lg shadow-lg mb-6">
-                    <h1 class="font-bold text-xl mb-2">🚨 Date Closed</h1>
-                    <p class="text-base">The deadline has passed. The date for submission has closed.</p>
-                </div>
+             
 
                 <!-- Undertaking Text -->
                 <div class="mb-6">
