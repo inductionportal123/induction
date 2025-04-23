@@ -153,11 +153,11 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             </button>
         </form>
     </div>
-    <div class="flex items-end">
-        <!-- Move Next Button -->
-        <a href="documents.php" class="mt-4 block px-6 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all w-full text-center font-semibold nav-tab <?php echo $current_page === 'documents.php' ? 'active' : ''; ?>">
-            <i class="fas fa-file-upload mr-2"></i> Move to Next Step<br>
-            <span class="text-sm <?php echo $current_page === 'documents.php' ? 'text-teal-200' : 'text-teal-100'; ?>">دستاویزات اپ لوڈ کریں</span>
+    <div class="flex items-end justify-end">
+        <!-- Move Next Button (Small) -->
+        <a href="documents.php" class="mt-4 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-all text-sm font-semibold nav-tab <?php echo $current_page === 'documents.php' ? 'active' : ''; ?>">
+            <i class="fas fa-arrow-right mr-1"></i> Move Next
+            <span class="block text-xs <?php echo $current_page === 'documents.php' ? 'text-teal-200' : 'text-teal-100'; ?>">اگلا مرحلہ</span>
         </a>
     </div>
 </div>
