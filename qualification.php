@@ -324,7 +324,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     <tr>
         <th class="form-label">01</th>
         <td>
-            <input type="text" value="B.Ed/Equivalent" class="w-full p-3 border rounded-md bg-gray-100 text-gray-600 cursor-not-allowed" readonly>
+            <input type="text" value="B.Ed/Equivalent" class="w-full p-3 border rounded-md bg-gray-100 text-gray-600 cursor-not-allowed" >
             <input type="hidden" name="dip_name_one" value="B.Ed/Equivalent">
         </td>
         <td>
