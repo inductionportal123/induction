@@ -1,70 +1,65 @@
 <?php
-// Enable error reporting for debugging (remove in production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+include('connection/conn.php');
 
-// Include database connection
-include 'connection/conn.php';
-if ($conn->connect_error) {
-    error_log("Database connection failed: " . $conn->connect_error);
-    die("<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-            <i class='fas fa-exclamation-circle mr-2'></i> Database connection error. Please try again later.</div>");
+// Start session if not already started
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
-
-// Start session with secure settings
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_only_cookies', 1);
-ini_set('session.cookie_secure', 1); // Enable if using HTTPS
-session_start();
 
 // Session timeout (5 minutes)
 $timeout = 5 * 60;
+
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout) {
     session_unset();
     session_destroy();
     header("Location: login.php");
-    exit;
+    exit();
 }
-$_SESSION['last_activity'] = time();
 
-// Generate CSRF token if not set
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+$_SESSION['last_activity'] = time();
 
 // Check if user is logged in
 if (!isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     header("Location: index.php");
-    exit;
+    exit();
 }
 
 $user = $_SESSION['u_name'];
 $userid = (int)$_SESSION['u_id'];
 
 // Fetch user profile data
-$query = "SELECT ad.cnic, ad.id, ad.name, pic.contact_mobile, 
+$query = "SELECT pi.undertaking, pi.basic_full_name, pi.contact_cnic, 
+                 pi.basic_dob, pi.basic_gender, pi.said, pic.contact_mobile, 
                  pic.contact_email, pic.contact_postal_address, pa.post_apply, 
                  ed.image 
-          FROM acount_details ad
-          WHERE ad.id = ?";
+          FROM per_info pi
+          INNER JOIN emp_document ed ON pi.said = ed.said 
+          INNER JOIN per_info_contact pic ON pi.said = pic.said
+          INNER JOIN post_apply pa ON pi.said = pa.said 
+          WHERE pi.said = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $userid);
-if (!$stmt->execute()) {
-    error_log("Profile query failed: " . $stmt->error);
-    die("<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-            <i class='fas fa-exclamation-circle mr-2'></i> Database error occurred.</div>");
-}
+$stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows === 1) {
     $rows = $result->fetch_assoc();
-    $row_name = $rows['name'];
-    $row_cnic = $rows['cnic'];
-    $row_said = $rows['id'];
+    $row_name = $rows['basic_full_name'];
+    $row_dob = $rows['basic_dob'];
+    $row_cnic = $rows['contact_cnic'];
+    $row_gender = $rows['basic_gender'];
+    $row_said = $rows['said'];
+    $row_mobile = $rows['contact_mobile'];
+    $row_email = $rows['contact_email'];
+    $row_postal = $rows['contact_postal_address'];
+    $row_post = $rows['post_apply'];
+    $row_image = $rows['image'];
+    $undertaking = $rows['undertaking'];
+    $profile_picture = $rows['image'];
 } else {
     echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
             <i class='fas fa-exclamation-circle mr-2'></i> Error: User profile not found.</div>";
-    exit;
+    exit();
 }
 $stmt->close();
 ?>
@@ -88,9 +83,6 @@ $stmt->close();
         .form-label { font-weight: 600; color: #374151; }
         .table-container { max-height: 400px; overflow-y: auto; }
         .image-preview { max-width: 100px; max-height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #e5e7eb; }
-        @media (max-width: 640px) {
-            .table-container { max-height: 300px; }
-        }
     </style>
 </head>
 <body class="bg-stone-50 font-sans antialiased">
@@ -110,15 +102,14 @@ $stmt->close();
                 <h3 class="text-lg font-semibold text-teal-700 mb-4 flex items-center">
                     <i class="fas fa-pen mr-2"></i> Submit a Query
                 </h3>
-                <form method="post" action="" enctype="multipart/form-data" class="space-y-4" id="queryForm">
-                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
+                <form method="post" action="" enctype="multipart/form-data" class="space-y-4">
                     <div>
                         <label class="form-label">Write Your Query:</label>
                         <textarea name="query" rows="5" required class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 resize-none" placeholder="Enter your query here..."></textarea>
                     </div>
                     <div>
                         <label class="form-label">Attach a File (Optional, JPG/JPEG, < 500KB):</label>
-                        <input type="file" name="queryPicture" accept="image/jpeg,image/jpg" class="w-full p-2 border rounded-md" id="queryPicture">
+                        <input type="file" name="queryPicture" accept="image/jpeg,image/jpg" class="w-full p-2 border rounded-md">
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" name="submit" class="px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-600 transition-all">
@@ -129,22 +120,12 @@ $stmt->close();
 
                 <?php
                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
-                    // Validate CSRF token
-                    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-                        echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-                                <i class='fas fa-exclamation-circle mr-2'></i> Error: Invalid form submission.</div>";
-                        exit;
-                    }
-
-                    // Regenerate CSRF token
-                    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-
-                    $query1 = trim($_POST['query']);
+                    $query1 = $conn->real_escape_string(trim($_POST['query']));
                     $picture_path = null;
                     $upload_success = true;
 
                     if (isset($_FILES['queryPicture']) && $_FILES['queryPicture']['error'] !== UPLOAD_ERR_NO_FILE) {
-                        $file_name = $_FILES['queryPicture']['name'];
+                        $picture = $_FILES['queryPicture']['name'];
                         $temp_file = $_FILES['queryPicture']['tmp_name'];
                         $file_size = $_FILES['queryPicture']['size'];
                         $uploads_directory = "Uploads/";
@@ -154,9 +135,9 @@ $stmt->close();
                             mkdir($uploads_directory, 0755, true);
                         }
 
-                        $file_extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
-                        $safe_file_name = uniqid('query_', true) . '.' . $file_extension;
-                        $upload_path = $uploads_directory . $safe_file_name;
+                        $file_extension = strtolower(pathinfo($picture, PATHINFO_EXTENSION));
+                        $picture = uniqid('query_') . '.' . $file_extension;
+                        $upload_path = $uploads_directory . $picture;
 
                         $allowed_types = ['jpg', 'jpeg'];
                         $max_size = 500 * 1024; // 500KB
@@ -173,20 +154,9 @@ $stmt->close();
                             echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
                                     <i class='fas fa-exclamation-circle mr-2'></i> Error: File is empty.</div>";
                             $upload_success = false;
-                        } elseif (!is_uploaded_file($temp_file)) {
-                            echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-                                    <i class='fas fa-exclamation-circle mr-2'></i> Error: Invalid file upload.</div>";
-                            $upload_success = false;
                         } else {
-                            // Additional MIME type check
-                            $finfo = finfo_open(FILEINFO_MIME_TYPE);
-                            $mime = finfo_file($finfo, $temp_file);
-                            finfo_close($finfo);
-                            if (!in_array($mime, ['image/jpeg', 'image/jpg'])) {
-                                echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-                                        <i class='fas fa-exclamation-circle mr-2'></i> Error: Invalid file type.</div>";
-                                $upload_success = false;
-                            } elseif (move_uploaded_file($temp_file, $upload_path)) {
+                            $picture = preg_replace('/[^A-Za-z0-9\._-]/', '', $picture);
+                            if (move_uploaded_file($temp_file, $upload_path)) {
                                 if (!getimagesize($upload_path)) {
                                     unlink($upload_path);
                                     echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
@@ -203,7 +173,7 @@ $stmt->close();
                         }
                     }
 
-                    if ($upload_success && !empty($query1)) {
+                    if ($upload_success) {
                         date_default_timezone_set("Asia/Karachi");
                         $time = date("Y-m-d H:i:s");
 
@@ -215,14 +185,10 @@ $stmt->close();
                             echo "<div class='mt-4 p-4 bg-green-100 text-green-700 rounded-lg flex items-center'>
                                     <i class='fas fa-check-circle mr-2'></i> Query submitted successfully!</div>";
                         } else {
-                            error_log("Query insert failed: " . $stmt->error);
                             echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-                                    <i class='fas fa-exclamation-circle mr-2'></i> Error: Database error occurred.</div>";
+                                    <i class='fas fa-exclamation-circle mr-2'></i> Error: " . htmlspecialchars($conn->error) . "</div>";
                         }
                         $stmt->close();
-                    } elseif (empty($query1)) {
-                        echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-                                <i class='fas fa-exclamation-circle mr-2'></i> Error: Query text is required.</div>";
                     }
                 }
                 ?>
@@ -232,19 +198,15 @@ $stmt->close();
             <?php
             $query2 = "SELECT q.*, pi.basic_full_name 
                       FROM query q
-                      LEFT JOIN per_info pi ON q.said = pi.said 
+                      INNER JOIN per_info pi ON q.said = pi.said 
                       WHERE q.said = ? 
                       ORDER BY q.q_time DESC";
             $stmt = $conn->prepare($query2);
             $stmt->bind_param("i", $userid);
-            if (!$stmt->execute()) {
-                error_log("Existing queries query failed: " . $stmt->error);
-                echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-                        <i class='fas fa-exclamation-circle mr-2'></i> Error: Database error occurred.</div>";
-            } else {
-                $result2 = $stmt->get_result();
+            $stmt->execute();
+            $result2 = $stmt->get_result();
 
-                if ($result2->num_rows > 0) {
+            if ($result2->num_rows > 0) {
             ?>
                 <div class="card p-6 rounded-lg">
                     <h3 class="text-lg font-semibold text-teal-700 mb-4 flex items-center">
@@ -265,7 +227,7 @@ $stmt->close();
                                     <tr class="hover:bg-gray-50">
                                         <td class="p-3 border-b"><?php echo htmlspecialchars(strtoupper($rows['query'] . '<br>' . $rows['q_time'])); ?></td>
                                         <td class="p-3 border-b">
-                                            <?php if (!empty($rows['picture']) && $rows['picture'] !== 'NULL' && file_exists($rows['picture'])) { ?>
+                                            <?php if (!empty($rows['picture']) && $rows['picture'] !== 'NULL') { ?>
                                                 <a href="<?php echo htmlspecialchars($rows['picture']); ?>" target="_blank">
                                                     <img src="<?php echo htmlspecialchars($rows['picture']); ?>" alt="Query File" class="image-preview">
                                                 </a>
@@ -275,7 +237,7 @@ $stmt->close();
                                             <?php echo ($rows['ans'] === null) ? 'Yet not answered' : htmlspecialchars(strtoupper($rows['ans'] . '<br>(' . $rows['f_time'] . ')')); ?>
                                         </td>
                                         <td class="p-3 border-b">
-                                            <?php if (!empty($rows['ansPicture']) && $rows['ansPicture'] !== 'NULL' && file_exists($rows['ansPicture'])) { ?>
+                                            <?php if (!empty($rows['ansPicture']) && $rows['ansPicture'] !== 'NULL') { ?>
                                                 <a href="<?php echo htmlspecialchars($rows['ansPicture']); ?>" target="_blank">
                                                     <img src="<?php echo htmlspecialchars($rows['ansPicture']); ?>" alt="Feedback File" class="image-preview">
                                                 </a>
@@ -288,7 +250,6 @@ $stmt->close();
                     </div>
                 </div>
             <?php
-                }
             }
             $stmt->close();
             ?>
@@ -318,34 +279,6 @@ $stmt->close();
         document.onmousemove = resetTimer;
         document.onkeypress = resetTimer;
         resetTimer();
-
-        // Client-side form validation
-        $(document).ready(function() {
-            $('#queryForm').on('submit', function(e) {
-                const fileInput = $('#queryPicture')[0];
-                if (fileInput.files.length > 0) {
-                    const file = fileInput.files[0];
-                    const maxSize = 500 * 1024; // 500KB
-                    const allowedTypes = ['image/jpeg', 'image/jpg'];
-
-                    if (!allowedTypes.includes(file.type)) {
-                        e.preventDefault();
-                        alert('Only JPG/JPEG files are allowed.');
-                        return false;
-                    }
-                    if (file.size > maxSize) {
-                        e.preventDefault();
-                        alert('File size must be less than 500KB.');
-                        return false;
-                    }
-                    if (file.size === 0) {
-                        e.preventDefault();
-                        alert('File is empty.');
-                        return false;
-                    }
-                }
-            });
-        });
     </script>
 </body>
 </html>
