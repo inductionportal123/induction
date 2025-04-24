@@ -18,50 +18,7 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) >
 
 $_SESSION['last_activity'] = time();
 
-// Check if user is logged in
-if (!isset($_SESSION['u_name'], $_SESSION['u_id'])) {
-    header("Location: index.php");
-    exit();
-}
 
-$user = $_SESSION['u_name'];
-$userid = (int)$_SESSION['u_id'];
-
-// Fetch user profile data
-$query = "SELECT pi.undertaking, pi.basic_full_name, pi.contact_cnic, 
-                 pi.basic_dob, pi.basic_gender, pi.said, pic.contact_mobile, 
-                 pic.contact_email, pic.contact_postal_address, pa.post_apply, 
-                 ed.image 
-          FROM per_info pi
-          INNER JOIN emp_document ed ON pi.said = ed.said 
-          INNER JOIN per_info_contact pic ON pi.said = pic.said
-          INNER JOIN post_apply pa ON pi.said = pa.said 
-          WHERE pi.said = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $userid);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 1) {
-    $rows = $result->fetch_assoc();
-    $row_name = $rows['basic_full_name'];
-    $row_dob = $rows['basic_dob'];
-    $row_cnic = $rows['contact_cnic'];
-    $row_gender = $rows['basic_gender'];
-    $row_said = $rows['said'];
-    $row_mobile = $rows['contact_mobile'];
-    $row_email = $rows['contact_email'];
-    $row_postal = $rows['contact_postal_address'];
-    $row_post = $rows['post_apply'];
-    $row_image = $rows['image'];
-    $undertaking = $rows['undertaking'];
-    $profile_picture = $rows['image'];
-} else {
-    echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
-            <i class='fas fa-exclamation-circle mr-2'></i> Error: User profile not found.</div>";
-    exit();
-}
-$stmt->close();
 ?>
 
 <!DOCTYPE html>

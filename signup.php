@@ -102,7 +102,7 @@
 
         <div class="form-group">
             <label for="c_cnic">Confirm CNIC</label>
-            <input type="text" class="form-control" name="c_cnic" id="c_cnic" placeholder="Confirm CNIC" data-inputmask="'mask': '99999-9999999-9'" required>
+            <input type="text" class="form-control" name="c_cnic" min="6" id="c_cnic" placeholder="Confirm CNIC" data-inputmask="'mask': '99999-9999999-9'" required>
         </div>
 
         <div class="form-group">
