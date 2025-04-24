@@ -433,7 +433,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         // AJAX Form Submission
         $("#basic_info_form_btn").click(function() {
             const formData = $('#first_person_form').serialize();
-            const requiredFields = ["basic_name", "basic_fname", "basic_gender", "basic_dob", "basic_domicile", "basic_status", "network", "basic_phone", "basic_cnic", "basic_email", "basic_district", "basic_city", "basic_religion", "basic_postal", "basic_permanent"];
+            const requiredFields = ["basic_name", "basic_fname", "basic_gender", "basic_dob", "basic_domicile", "basic_status", "network", "basic_phone", "basic_cnic", "basic_email", "basic_district", "basic_city", "basic_religion", "basic_postal", "basic_permanent",'disability'];
             const husbandFields = ["basic_husbandname", "sbasic_domicile", "sbasic_district"];
             let isValid = true;
 
