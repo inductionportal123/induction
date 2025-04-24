@@ -146,7 +146,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <i class="fas fa-briefcase mr-2"></i> Post Information <span class="text-sm text-gray-500 ml-2">(* Mandatory Fields)</span>
                     </h3>
 
-    <!-- Category I: Teaching (BPS-16) -->
+<!-- Category I: Teaching (BPS-16) -->
 <div class="mb-6">
     <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS-16) | زمرہ I: تدریسی عملہ</h4>
     <style>
@@ -274,7 +274,51 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 <!-- Category I: Teaching (BPS-17) -->
 <div class="mb-6">
     <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS-17) | زمرہ I: تدریسی عملہ</h4>
-   
+    <?php
+    // Re-run the same qualification logic for BPS-17
+    if ($qualirow > 0) {
+        // Use the same $eligible_degrees and $eligible_degrees_str from above
+        if (empty($eligible_degrees)) {
+            echo '<p class="text-red-600">No valid qualifications found. Please add qualifications first.</p>';
+        } else {
+            // Query to fetch eligible posts for BPS-17
+            $newquery = $user_gender == 'transgender'
+                ? "SELECT p.pid, p.name, p.gender, p.bps 
+                   FROM posts p
+                   JOIN post_details pd ON p.pid = pd.pid
+                   WHERE p.cat = 3 
+                   AND pd.req_deg IN ($eligible_degrees_str)
+                   AND p.bps = 17
+                   ORDER BY p.bps ASC"
+                : "SELECT p.pid, p.name, p.gender, p.bps 
+                   FROM posts p
+                   JOIN post_details pd ON p.pid = pd.pid
+                   WHERE p.cat = 3 
+                   AND pd.req_deg IN ($eligible_degrees_str)
+                   AND (p.gender = '$user_gender' OR p.gender = 'both') 
+                   AND p.bps = 17
+                   ORDER BY p.bps ASC";
+
+            $newexe = mysqli_query($conn, $newquery);
+            if (mysqli_num_rows($newexe) > 0) {
+                echo '<div class="checkbox-group">';
+                while ($rows = mysqli_fetch_array($newexe)) {
+                    $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
+                    echo "<label class='checkbox-item'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . ", BPS-{$rows['bps']}</small>)</label>";
+                }
+                echo '</div>';
+            } else {
+                echo '<p class="text-red-600">No BPS-17 posts available for your qualifications.</p>';
+            }
+        }
+    } else {
+        echo '<p class="text-red-600">Please add <b>Qualifications</b> first.</p>';
+    }
+    ?>
+</div>
+
+
+                
                 </div>
 
                 <!-- Test City -->
