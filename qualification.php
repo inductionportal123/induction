@@ -328,10 +328,10 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             <input type="hidden" name="dip_name_one" value="B.Ed/Equivalent">
         </td>
         <td>
-    <input type="number" name="dip_obt_one" id="dip_obt_one" value="<?php echo htmlspecialchars($profes_obtained_marks); ?>" min="0" step="any" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
+    <input type="number" name="dip_obt_one" id="dip_obt_one" value="<?php echo htmlspecialchars($profes_obtained_marks); ?>" min="0" step="1" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
 </td>
 <td>
-    <input type="number" name="dip_total_one" id="dip_total_one" value="<?php echo htmlspecialchars($profes_total_marks); ?>" min="0" step="any" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
+    <input type="number" name="dip_total_one" id="dip_total_one" value="<?php echo htmlspecialchars($profes_total_marks); ?>" min="0" step="1" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
 </td>
         <td>
             <input type="text" name="dip_board_one" id="dip_board_one" value="<?php echo htmlspecialchars($profes_board); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
