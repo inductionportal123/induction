@@ -306,7 +306,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             const file = input.files[0];
             const feedback = $(`#${feedbackId}`);
             const submitBtn = $('#submit_btn');
-            if (file && file.size <= sizeLimit && file.name.match(/.(jpg|JPG|jpeg|JPEG)$/i)) {
+            if (file && file.size <= sizeLimit && file.name.match(/.(jpg|JPG|jpeg|JPEG|png|PNG)$/i)) {
                 feedback.text("Image uploaded successfully.").css({ color: 'green', fontSize: '0.875rem' });
                 submitBtn.prop('disabled', false);
             } else {
