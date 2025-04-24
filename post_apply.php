@@ -155,14 +155,14 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         $qualirow = mysqli_num_rows($exequali);
                         if ($qualirow > 0) {
                             $newquery = $user_gender == 'transgender' 
-                                ? "SELECT `pid`,`name`,`gender` FROM `posts` WHERE posts.cat = 3 AND posts.pid IN (SELECT post_details.pid FROM post_details WHERE post_details.req_deg IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16')) ORDER BY `bps` ASC"
-                                : "SELECT `pid`,`name`,`gender` FROM `posts` WHERE posts.cat = 3 AND posts.pid IN (SELECT post_details.pid FROM post_details WHERE post_details.req_deg IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16')) AND (posts.gender = '$user_gender' OR posts.gender = 'both') ORDER BY `bps` ASC";
+                                ? "SELECT `pid`,`name`,`gender`,`bps`s FROM `posts` WHERE posts.cat = 3 AND posts.pid IN (SELECT post_details.pid FROM post_details WHERE post_details.req_deg IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16')) ORDER BY `bps` ASC"
+                                : "SELECT `pid`,`name`,`gender`,`bps` FROM `posts` WHERE posts.cat = 3 AND posts.pid IN (SELECT post_details.pid FROM post_details WHERE post_details.req_deg IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16')) AND (posts.gender = '$user_gender' OR posts.gender = 'both') ORDER BY `bps` ASC";
                             $newexe = mysqli_query($conn, $newquery);
                             if (mysqli_num_rows($newexe) > 0) {
                                 echo '<div class="checkbox-group">';
                                 while ($rows = mysqli_fetch_array($newexe)) {
                                     $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
-                                    echo "<label class='checkbox-item flex items-center'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' class='mr-2' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . "</small>)</label>";
+                                    echo "<label class='checkbox-item flex items-center'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' class='mr-2' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . strtoupper($rows['bps']) . "</small>)</label>";
                                 }
                                 echo '</div>';
                             }
