@@ -31,13 +31,8 @@ $list = '';
 
     
     
-    if ($ppp == 1 && ($dt == 'NULL' || $dt == '' || $dt == NULL)) {
-
-        echo "<script>alert('Professional Degree required for " . $opendata1['name'] . " Post. Please Complete Professional Degree Portion from Qulification ');
-        window.location.replace('post_apply.php');</script>";
-        ?>
-       
-        <?php
+    if ($ppp == 1 && (is_null($dt) || $dt === '')) {
+        echo 'Professional Degree required for ' . htmlspecialchars($opendata1['name']) . ' Post. Please Complete Professional Degree Portion from Qualification';
     }
         else{
             
