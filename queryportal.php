@@ -18,7 +18,38 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) >
 
 $_SESSION['last_activity'] = time();
 
+// Check if user is logged in
+if (!isset($_SESSION['u_name'], $_SESSION['u_id'])) {
+    header("Location: index.php");
+    exit();
+}
 
+$user = $_SESSION['u_name'];
+$userid = (int)$_SESSION['u_id'];
+
+// Fetch user profile data
+$query = "SELECT ad.cnic,ad.id, ad.name, pic.contact_mobile, 
+                 pic.contact_email, pic.contact_postal_address, pa.post_apply, 
+                 ed.image 
+          FROM acount_details ad
+          WHERE ad.id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $userid);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 1) {
+    $rows = $result->fetch_assoc();
+    $row_name = $rows['name'];
+    $row_cnic = $rows['cnic'];
+    $row_said = $rows['id'];
+
+} else {
+    echo "<div class='mt-4 p-4 bg-red-100 text-red-700 rounded-lg flex items-center'>
+            <i class='fas fa-exclamation-circle mr-2'></i> Error: User profile not found.</div>";
+    exit();
+}
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
