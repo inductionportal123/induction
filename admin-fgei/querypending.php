@@ -388,6 +388,8 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
 <?php
 mysqli_close($conn);
 }
+
+}
 else{
   header("Location: index.php");
 }
