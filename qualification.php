@@ -323,7 +323,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                             <tbody>
                                 <tr>
                                     <th class="form-label">01</th>
-                                    <td><input type="text" name="dip_name_one" value="B.ed/Equivalent " class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+                                    <td><input type="text" name="dip_name_one" value="B.ed/Equivalent " class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" readonly></td>
                                     <td><input type="text" name="dip_obt_one" value="<?php echo htmlspecialchars($profes_obtained_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
                                     <td><input type="text" name="dip_total_one" value="<?php echo htmlspecialchars($profes_total_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
                                     <td><input type="text" name="dip_board_one" value="<?php echo htmlspecialchars($profes_board); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
