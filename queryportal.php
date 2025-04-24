@@ -42,7 +42,7 @@ $stmt->bind_param("i", $userid);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows === 1) {
+if ($result->num_rows === 1 || $result->num_rows !== 1 ) {
     $rows = $result->fetch_assoc();
     $row_name = $rows['basic_full_name'];
     $row_dob = $rows['basic_dob'];
