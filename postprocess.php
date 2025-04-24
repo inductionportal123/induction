@@ -32,15 +32,8 @@ $list = '';
     
     
     if ($ppp == 1 && (is_null($dt) || $dt === '')) {
-        ?>
-        <script>
-            alert("Professional Degree required for <?php echo htmlspecialchars($opendata1['name'], ENT_QUOTES, 'UTF-8'); ?> Post. Please Complete Professional Degree Portion from Qualification");
-            setTimeout(function() {
-                window.location.replace("post_apply.php");
-            }, 1000); // Redirect after 1 second
-        </script>
-        <?php
-        echo 'A Professional Degree is required for the ' . htmlspecialchars($opendata1['name']) . ' position. Please complete the Professional Degree section in your Qualification Section.';
+        echo 'A Professional Degree is required for the ' . htmlspecialchars($opendata1['name']) . ' position.
+         Please complete the Professional Degree section in your Qualification Section.';
     }
         else{
             
