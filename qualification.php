@@ -321,7 +321,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                            <tr>
+    <tr>
         <th class="form-label">01</th>
         <td>
             <input type="text" value="B.Ed/Equivalent" class="w-full p-3 border rounded-md bg-gray-100 text-gray-600 cursor-not-allowed" readonly>
@@ -337,21 +337,21 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             <input type="text" name="dip_board_one" id="dip_board_one" value="<?php echo htmlspecialchars($profes_board); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
         </td>
     </tr>
-                                <tr>
-                                    <th class="form-label">02</th>
-                                    <td><input type="text" name="dip_name_two" value="<?php echo htmlspecialchars($profes_certificate_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_obt_two" value="<?php echo htmlspecialchars($profes_obtained_marks_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_total_two" value="<?php echo htmlspecialchars($profes_total_marks_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_board_two" value="<?php echo htmlspecialchars($profes_board_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                </tr>
-                                <tr>
-                                    <th class="form-label">03</th>
-                                    <td><input type="text" name="dip_name_three" value="<?php echo htmlspecialchars($profes_certificate_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_obt_three" value="<?php echo htmlspecialchars($profes_obtained_marks_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_total_three" value="<?php echo htmlspecialchars($profes_total_marks_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_board_three" value="<?php echo htmlspecialchars($profes_board_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                </tr>
-                            </tbody>
+    <tr>
+        <th class="form-label">02</th>
+        <td><input type="text" name="dip_name_two" value="<?php echo htmlspecialchars($profes_certificate_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+        <td><input type="text" name="dip_obt_two" value="<?php echo htmlspecialchars($profes_obtained_marks_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+        <td><input type="text" name="dip_total_two" value="<?php echo htmlspecialchars($profes_total_marks_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+        <td><input type="text" name="dip_board_two" value="<?php echo htmlspecialchars($profes_board_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+    </tr>
+    <tr>
+        <th class="form-label">03</th>
+        <td><input type="text" name="dip_name_three" value="<?php echo htmlspecialchars($profes_certificate_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+        <td><input type="text" name="dip_obt_three" value="<?php echo htmlspecialchars($profes_obtained_marks_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+        <td><input type="text" name="dip_total_three" value="<?php echo htmlspecialchars($profes_total_marks_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+        <td><input type="text" name="dip_board_three" value="<?php echo htmlspecialchars($profes_board_three); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
+    </tr>
+</tbody>
                         </table>
                     </div>
                 </div>
