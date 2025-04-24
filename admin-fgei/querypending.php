@@ -201,7 +201,7 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
     $from = $offset+1;
     $to = $offset+$no_of_records_per_page;
     $counter = $from-1;
-    $query2 = "SELECT acount_details.email,acount_details.cnic , query.query,query.picture , query.q_time , query.ans , query.f_time , query.id, query.ansPicture FROM `acount_details`,`query`  WHERE query.said=acount_details.id AND query.ans IS NULL ORDER BY `query`.`id`  DESC LIMIT $offset, $no_of_records_per_page  ";
+    $query2 = "SELECT acount_details.email,acount_details.cnic , query.query,query.picture , query.q_time , query.ans , query.f_time , query.id FROM `acount_details`,`query`  WHERE query.said=acount_details.id AND query.ans IS NULL ORDER BY `query`.`id`  DESC LIMIT $offset, $no_of_records_per_page  ";
     $exe2 = mysqli_query($conn,$query2);
     if (!$exe2){
         echo die(mysqli_error($conn));
@@ -253,10 +253,6 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
                         else
                         {
                             echo strtoupper($rows['ans'].'<br>('.$rows['f_time'].')');
-                            // Display ansPicture if it exists
-                            if (!empty($rows['ansPicture']) && $rows['ansPicture'] !== "NULL") {
-                                echo '<br><a href="' . $rows['ansPicture'] . '" target="_blank"><img src="' . $rows['ansPicture'] . '" style="max-width: 100px; max-height: 100px;"></a>';
-                            }
                         } 
                     ?>
                     </td>
@@ -273,75 +269,13 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="form-group" action="" method="post" enctype="multipart/form-data" >
+                            <form class="form-group" action="" method="post" enctype="multipart/form-data">
                                 <input class="form-control" type="hidden" name="id" value="<?php echo $rows['id'];?>" />
                                 <textarea class="form-control" name="feedback" required><?php echo $rows['ans']?></textarea>
                                 <br>
                                 <input type="file" name="AdminPicture" style="margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; box-sizing: border-box;">
                                 <button style="float-right" type="submit" name="submit" class="btn btn-primary">Send Reply</button>
                             </form>
-                            <?php
-                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                                if (isset($_POST['submit'])) {
-                                    date_default_timezone_set("Asia/Karachi");
-                                    $time = date("Y-m-d h:i:sa");
-                                    $id = $_POST['id'];
-                                    $feedback = $_POST['feedback'];
-
-                                    // Define upload directory and ensure it exists
-                                    $uploads_directory = "../Uploads/";
-                                    if (!is_dir($uploads_directory)) {
-                                        mkdir($uploads_directory, 0755, true); // Create directory if it doesn't exist
-                                    }
-
-                                    // Check if AdminPicture is set and uploaded
-                                    $picture_path = "NULL"; // Default value
-                                    if (isset($_FILES['AdminPicture']) && $_FILES['AdminPicture']['error'] === UPLOAD_ERR_OK) {
-                                        $picture = $_FILES['AdminPicture']['name'];
-                                        $temp_file = $_FILES['AdminPicture']['tmp_name'];
-                                        $upload_path = $uploads_directory . basename($picture);
-
-                                        // Validate file type and size
-                                        $allowed_types = ['image/jpeg', 'image/png', 'application/pdf'];
-                                        $max_size = 5 * 1024 * 1024; // 5MB
-                                        $file_type = mime_content_type($temp_file);
-                                        $file_size = $_FILES['AdminPicture']['size'];
-
-                                        if (in_array($file_type, $allowed_types) && $file_size <= $max_size) {
-                                            // Move uploaded file to specified directory
-                                            if (move_uploaded_file($temp_file, $upload_path)) {
-                                                $picture_path = $upload_path;
-                                            } else {
-                                                echo "<script>alert('Error: Failed to move uploaded file. Check directory permissions.');</script>";
-                                            }
-                                        } else {
-                                            echo "<script>alert('Error: Invalid file type or size. Allowed types: JPEG, PNG, PDF. Max size: 5MB.');</script>";
-                                        }
-                                    } elseif ($_FILES['AdminPicture']['error'] !== UPLOAD_ERR_NO_FILE) {
-                                        // Handle other file upload errors
-                                        echo "<script>alert('Error: File upload failed with error code " . $_FILES['AdminPicture']['error'] . ".');</script>";
-                                    }
-
-                                    // Update the database with feedback and picture path
-                                    $sql = "UPDATE query SET ans=?, ansPicture=?, f_time=? WHERE id=?";
-                                    $stmt = $conn->prepare($sql);
-                                    $stmt->bind_param("sssi", $feedback, $picture_path, $time, $id);
-
-                                    if ($stmt->execute()) {
-                                        // Redirect to querypending.php with appropriate page number
-                                        if (isset($pageno)) {
-                                            header('location: querypending.php?pageno=' . $pageno);
-                                        } else {
-                                            header('location: querypending.php');
-                                        }
-                                        exit();
-                                    } else {
-                                        echo "<script>alert('Error: " . addslashes($conn->error) . "');</script>";
-                                    }
-                                    $stmt->close();
-                                }
-                            }
-                            ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -360,8 +294,61 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
         
         <?php
       }
+      // Form submission logic moved outside the loop
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
+          date_default_timezone_set("Asia/Karachi");
+          $time = date("Y-m-d h:i:sa");
+          $id = $_POST['id'];
+          $feedback = $_POST['feedback'];
+
+          // Define upload directory and ensure it exists
+          $uploads_directory = "../Uploads/";
+          if (!is_dir($uploads_directory)) {
+              mkdir($uploads_directory, 0755, true);
+          }
+
+          // Handle file upload
+          $picture_path = "NULL";
+          if (isset($_FILES['AdminPicture']) && $_FILES['AdminPicture']['error'] === UPLOAD_ERR_OK) {
+              $picture = $_FILES['AdminPicture']['name'];
+              $temp_file = $_FILES['AdminPicture']['tmp_name'];
+              $upload_path = $uploads_directory . basename($picture);
+
+              // Validate file type and size
+              $allowed_types = ['image/jpeg', 'image/png', 'application/pdf'];
+              $max_size = 5 * 1024 * 1024; // 5MB
+              $file_type = mime_content_type($temp_file);
+              $file_size = $_FILES['AdminPicture']['size'];
+
+              if (in_array($file_type, $allowed_types) && $file_size <= $max_size) {
+                  if (move_uploaded_file($temp_file, $upload_path)) {
+                      $picture_path = $upload_path;
+                  } else {
+                      echo "<script>alert('Error: Failed to move uploaded file. Check directory permissions.');</script>";
+                  }
+              } else {
+                  echo "<script>alert('Error: Invalid file type or size. Allowed types: JPEG, PNG, PDF. Max size: 5MB.');</script>";
+              }
+          }
+
+          // Update database
+          $sql = "UPDATE query SET ans=?, ansPicture=?, f_time=? WHERE id=?";
+          $stmt = $conn->prepare($sql);
+          $stmt->bind_param("sssi", $feedback, $picture_path, $time, $id);
+
+          if ($stmt->execute()) {
+              if (isset($pageno)) {
+                  header('location: querypending.php?pageno=' . $pageno);
+              } else {
+                  header('location: querypending.php');
+              }
+              exit();
+          } else {
+              echo "<script>alert('Error updating database: " . addslashes($conn->error) . "');</script>";
+          }
+          $stmt->close();
       }
-        ?>
+      ?>
     </table>
             <?php
      $pagLink='';
