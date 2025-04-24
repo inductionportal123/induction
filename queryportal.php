@@ -196,7 +196,7 @@ $stmt->close();
 
             <!-- Existing Queries -->
             <?php
-            $query2 = "SELECT q.*, pi.basic_full_name 
+            $query2 = "SELECT q.*, ad.name 
                       FROM query q
                       INNER JOIN acount_details ad ON q.said = ad.id 
                       WHERE q.said = ? 
