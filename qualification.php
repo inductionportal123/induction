@@ -322,21 +322,21 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                             </thead>
                             <tbody>
                             <tr>
-    <th class="form-label">01</th>
-    <td>
-        <input type="text" value="B.Ed/Equivalent" class="w-full p-3 border rounded-md bg-gray-100 text-gray-600 cursor-not-allowed" readonly>
-        <input type="hidden" name="dip_name_one" value="B.Ed/Equivalent">
-    </td>
-    <td>
-        <input type="text" name="dip_obt_one" id="dip_obt_one" value="<?php echo htmlspecialchars($profes_obtained_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
-    </td>
-    <td>
-        <input type="text" name="dip_total_one" id="dip_total_one" value="<?php echo htmlspecialchars($profes_total_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
-    </td>
-    <td>
-        <input type="text" name="dip_board_one" id="dip_board_one" value="<?php echo htmlspecialchars($profes_board); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
-    </td>
-</tr>
+        <th class="form-label">01</th>
+        <td>
+            <input type="text" value="B.Ed/Equivalent" class="w-full p-3 border rounded-md bg-gray-100 text-gray-600 cursor-not-allowed" readonly>
+            <input type="hidden" name="dip_name_one" value="B.Ed/Equivalent">
+        </td>
+        <td>
+            <input type="text" name="dip_obt_one" id="dip_obt_one" value="<?php echo htmlspecialchars($profes_obtained_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
+        </td>
+        <td>
+            <input type="text" name="dip_total_one" id="dip_total_one" value="<?php echo htmlspecialchars($profes_total_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
+        </td>
+        <td>
+            <input type="text" name="dip_board_one" id="dip_board_one" value="<?php echo htmlspecialchars($profes_board); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500 required-field" required>
+        </td>
+    </tr>
                                 <tr>
                                     <th class="form-label">02</th>
                                     <td><input type="text" name="dip_name_two" value="<?php echo htmlspecialchars($profes_certificate_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
@@ -408,41 +408,10 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         }
     }
 
-    // Toggle required fields for professional qualification
-    function toggleProfessionalRequiredFields() {
-        const degree = document.getElementById('dip_name_one');
-        const obtainedMarks = document.getElementById('dip_obt_one');
-        const totalMarks = document.getElementById('dip_total_one');
-        const board = document.getElementById('dip_board_one');
-
-        if (degree && obtainedMarks && totalMarks && board) {
-            if (degree.value === 'B.Ed/Equivalent') {
-                obtainedMarks.required = true;
-                totalMarks.required = true;
-                board.required = true;
-                obtainedMarks.classList.add('required-field');
-                totalMarks.classList.add('required-field');
-                board.classList.add('required-field');
-            } else {
-                obtainedMarks.required = false;
-                totalMarks.required = false;
-                board.required = false;
-                obtainedMarks.classList.remove('required-field');
-                totalMarks.classList.remove('required-field');
-                board.classList.remove('required-field');
-                // Clear error styles
-                obtainedMarks.classList.remove('border-red-500');
-                totalMarks.classList.remove('border-red-500');
-                board.classList.remove('border-red-500');
-            }
-        }
-    }
-
     // Initialize required fields on page load
     ['bs', 'bs16', 'ms', 'primary'].forEach(prefix => {
         toggleRequiredFields(prefix);
     });
-    toggleProfessionalRequiredFields(); // Initialize professional fields
 
     // AJAX Form Submission
     $("#qual_btn").click(function() {
@@ -475,27 +444,39 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             }
         });
 
-        // Validate professional qualification
-        const dipNameOne = $('#dip_name_one').val();
+        // Validate professional qualification (all fields are compulsory)
         const dipObtOne = $('#dip_obt_one').val();
         const dipTotalOne = $('#dip_total_one').val();
         const dipBoardOne = $('#dip_board_one').val();
 
-        if (dipNameOne === 'B.Ed/Equivalent') {
-            if (!dipObtOne || !dipTotalOne || !dipBoardOne) {
+        if (!dipObtOne || !dipTotalOne || !dipBoardOne) {
+            isValid = false;
+            if (!dipObtOne) $('#dip_obt_one').addClass('border-red-500');
+            if (!dipTotalOne) $('#dip_total_one').addClass('border-red-500');
+            if (!dipBoardOne) $('#dip_board_one').addClass('border-red-500');
+        } else {
+            // Validate numeric values and obtained marks <= total marks
+            const obtMarks = parseFloat(dipObtOne);
+            const totalMarks = parseFloat(dipTotalOne);
+            if (isNaN(obtMarks) || isNaN(totalMarks)) {
                 isValid = false;
-                if (!dipObtOne) $('#dip_obt_one').addClass('border-red-500');
-                if (!dipTotalOne) $('#dip_total_one').addClass('border-red-500');
-                if (!dipBoardOne) $('#dip_board_one').addClass('border-red-500');
+                if (isNaN(obtMarks)) $('#dip_obt_one').addClass('border-red-500');
+                if (isNaN(totalMarks)) $('#dip_total_one').addClass('border-red-500');
+                $('#response').text("Obtained Marks and Total Marks must be numeric.").addClass('text-red-600');
+            } else if (obtMarks <= 0 || totalMarks <= 0) {
+                isValid = false;
+                $('#dip_obt_one').addClass('border-red-500');
+                $('#dip_total_one').addClass('border-red-500');
+                $('#response').text("Obtained Marks and Total Marks must be positive numbers.").addClass('text-red-600');
+            } else if (obtMarks > totalMarks) {
+                isValid = false;
+                $('#dip_obt_one').addClass('border-red-500');
+                $('#response').text("Obtained Marks cannot exceed Total Marks.").addClass('text-red-600');
             } else {
                 $('#dip_obt_one').removeClass('border-red-500');
                 $('#dip_total_one').removeClass('border-red-500');
                 $('#dip_board_one').removeClass('border-red-500');
             }
-        } else {
-            $('#dip_obt_one').removeClass('border-red-500');
-            $('#dip_total_one').removeClass('border-red-500');
-            $('#dip_board_one').removeClass('border-red-500');
         }
 
         // Check if at least one academic qualification is provided
