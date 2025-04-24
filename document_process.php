@@ -20,7 +20,7 @@ if(isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         }
 
         $validExtensions = ['jpg',  'JPG','jpeg', 'JPEG','png', 'PNG'];
-        $maxFileSize = 512000; // 500 KB
+        $maxFileSize = 102400; // 500 KB
         $files = [
             'recipt_image' => 'recipt',
             'pdegree_image' => 'pdegree',

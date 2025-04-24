@@ -179,6 +179,10 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                     <h3 class="text-lg font-semibold text-teal-700 mb-4 flex items-center">
                         <i class="fas fa-graduation-cap mr-2"></i> Academic Information 
                         <span class="text-sm text-gray-500 ml-2">(* At least one academic qualification is required)</span>
+
+                        Please enter only completed degrees in the Academic Information and Professional
+                        Qualification sections.Degrees that are in progress are not eligible
+
                     </h3>
                     <div class="overflow-x-auto">
                         <table class="min-w-full">
