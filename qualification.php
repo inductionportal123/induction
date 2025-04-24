@@ -321,18 +321,24 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th class="form-label">01</th>
-                                    <td>
-    <select name="dip_name_one" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500">
-        <option value="" <?php echo empty($profes_certificate) ? 'selected' : ''; ?>>Select Degree</option>
-        <option value="B.Ed/Equivalent" <?php echo $profes_certificate === 'B.Ed/Equivalent' ? 'selected' : ''; ?>>B.Ed/Equivalent</option>
-    </select>
-</td>
-                                    <td><input type="text" name="dip_obt_one" value="<?php echo htmlspecialchars($profes_obtained_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_total_one" value="<?php echo htmlspecialchars($profes_total_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                    <td><input type="text" name="dip_board_one" value="<?php echo htmlspecialchars($profes_board); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
-                                </tr>
+                            <tr>
+    <th class="form-label">01</th>
+    <td>
+        <select name="dip_name_one" id="dip_name_one" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500" onchange="toggleProfessionalRequiredFields()">
+            <option value="" <?php echo empty($profes_certificate) ? 'selected' : ''; ?>>Select Degree</option>
+            <option value="B.Ed/Equivalent" <?php echo $profes_certificate === 'B.Ed/Equivalent' ? 'selected' : ''; ?>>B.Ed/Equivalent</option>
+        </select>
+    </td>
+    <td>
+        <input type="text" name="dip_obt_one" id="dip_obt_one" value="<?php echo htmlspecialchars($profes_obtained_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500">
+    </td>
+    <td>
+        <input type="text" name="dip_total_one" id="dip_total_one" value="<?php echo htmlspecialchars($profes_total_marks); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500">
+    </td>
+    <td>
+        <input type="text" name="dip_board_one" id="dip_board_one" value="<?php echo htmlspecialchars($profes_board); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500">
+    </td>
+</tr>
                                 <tr>
                                     <th class="form-label">02</th>
                                     <td><input type="text" name="dip_name_two" value="<?php echo htmlspecialchars($profes_certificate_two); ?>" class="w-full p-3 border rounded-md focus:ring-2 focus:ring-teal-500"></td>
@@ -368,111 +374,162 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         </div>
     </main>
 
-    <!-- Scripts -->
     <script>
-        // Sidebar Toggle
-        const sidebar = document.getElementById('sidebar');
-        const toggle = document.getElementById('sidebar-toggle');
-        const close = document.getElementById('sidebar-close');
-        if (toggle && close && sidebar) {
-            toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
-            close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
-        }
+    // Sidebar Toggle
+    const sidebar = document.getElementById('sidebar');
+    const toggle = document.getElementById('sidebar-toggle');
+    const close = document.getElementById('sidebar-close');
+    if (toggle && close && sidebar) {
+        toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
+        close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
+    }
 
-        // Toggle required fields based on degree selection
-        function toggleRequiredFields(prefix) {
-            const title = document.getElementById(`${prefix}_title`);
-            const specialization = document.getElementById(`${prefix}_specialization`);
-            const totalMarks = document.getElementById(`${prefix}_total_marks`);
-            const board = document.getElementById(`${prefix}_board`);
+    // Toggle required fields for academic qualifications
+    function toggleRequiredFields(prefix) {
+        const title = document.getElementById(`${prefix}_title`);
+        const specialization = document.getElementById(`${prefix}_specialization`);
+        const totalMarks = document.getElementById(`${prefix}_total_marks`);
+        const board = document.getElementById(`${prefix}_board`);
 
-            if (title && specialization && totalMarks && board) {
-                if (title.value) {
-                    specialization.required = true;
-                    totalMarks.required = true;
-                    board.required = true;
-                    specialization.classList.add('required-field');
-                    totalMarks.classList.add('required-field');
-                    board.classList.add('required-field');
-                } else {
-                    specialization.required = false;
-                    totalMarks.required = false;
-                    board.required = false;
-                    specialization.classList.remove('required-field');
-                    totalMarks.classList.remove('required-field');
-                    board.classList.remove('required-field');
-                }
+        if (title && specialization && totalMarks && board) {
+            if (title.value) {
+                specialization.required = true;
+                totalMarks.required = true;
+                board.required = true;
+                specialization.classList.add('required-field');
+                totalMarks.classList.add('required-field');
+                board.classList.add('required-field');
+            } else {
+                specialization.required = false;
+                totalMarks.required = false;
+                board.required = false;
+                specialization.classList.remove('required-field');
+                totalMarks.classList.remove('required-field');
+                board.classList.remove('required-field');
             }
         }
+    }
 
-        // Initialize required fields on page load
+    // Toggle required fields for professional qualification
+    function toggleProfessionalRequiredFields() {
+        const degree = document.getElementById('dip_name_one');
+        const obtainedMarks = document.getElementById('dip_obt_one');
+        const totalMarks = document.getElementById('dip_total_one');
+        const board = document.getElementById('dip_board_one');
+
+        if (degree && obtainedMarks && totalMarks && board) {
+            if (degree.value === 'B.Ed/Equivalent') {
+                obtainedMarks.required = true;
+                totalMarks.required = true;
+                board.required = true;
+                obtainedMarks.classList.add('required-field');
+                totalMarks.classList.add('required-field');
+                board.classList.add('required-field');
+            } else {
+                obtainedMarks.required = false;
+                totalMarks.required = false;
+                board.required = false;
+                obtainedMarks.classList.remove('required-field');
+                totalMarks.classList.remove('required-field');
+                board.classList.remove('required-field');
+                // Clear error styles
+                obtainedMarks.classList.remove('border-red-500');
+                totalMarks.classList.remove('border-red-500');
+                board.classList.remove('border-red-500');
+            }
+        }
+    }
+
+    // Initialize required fields on page load
+    ['bs', 'bs16', 'ms', 'primary'].forEach(prefix => {
+        toggleRequiredFields(prefix);
+    });
+    toggleProfessionalRequiredFields(); // Initialize professional fields
+
+    // AJAX Form Submission
+    $("#qual_btn").click(function() {
+        let isValid = true;
+        let hasAcademicQualification = false;
+
+        // Validate academic qualifications (at least one must be filled)
         ['bs', 'bs16', 'ms', 'primary'].forEach(prefix => {
-            toggleRequiredFields(prefix);
-        });
+            const title = $(`#${prefix}_title`).val();
+            const specialization = $(`#${prefix}_specialization`).val();
+            const totalMarks = $(`#${prefix}_total_marks`).val();
+            const board = $(`#${prefix}_board`).val();
 
-        // AJAX Form Submission
-        $("#qual_btn").click(function() {
-            let isValid = true;
-            let hasAcademicQualification = false;
-
-            // Validate academic qualifications (at least one must be filled)
-            ['bs', 'bs16', 'ms', 'primary'].forEach(prefix => {
-                const title = $(`#${prefix}_title`).val();
-                const specialization = $(`#${prefix}_specialization`).val();
-                const totalMarks = $(`#${prefix}_total_marks`).val();
-                const board = $(`#${prefix}_board`).val();
-
-                // If any field is filled, all fields for that qualification must be filled
-                if (title) {
-                    hasAcademicQualification = true;
-                    if (!specialization || !totalMarks || !board) {
-                        isValid = false;
-                        if (!specialization) $(`#${prefix}_specialization`).addClass('border-red-500');
-                        if (!totalMarks) $(`#${prefix}_total_marks`).addClass('border-red-500');
-                        if (!board) $(`#${prefix}_board`).addClass('border-red-500');
-                    } else {
-                        $(`#${prefix}_specialization`).removeClass('border-red-500');
-                        $(`#${prefix}_total_marks`).removeClass('border-red-500');
-                        $(`#${prefix}_board`).removeClass('border-red-500');
-                    }
+            if (title) {
+                hasAcademicQualification = true;
+                if (!specialization || !totalMarks || !board) {
+                    isValid = false;
+                    if (!specialization) $(`#${prefix}_specialization`).addClass('border-red-500');
+                    if (!totalMarks) $(`#${prefix}_total_marks`).addClass('border-red-500');
+                    if (!board) $(`#${prefix}_board`).addClass('border-red-500');
                 } else {
-                    // Clear error styles if title is not selected
                     $(`#${prefix}_specialization`).removeClass('border-red-500');
                     $(`#${prefix}_total_marks`).removeClass('border-red-500');
                     $(`#${prefix}_board`).removeClass('border-red-500');
                 }
-            });
-
-            // Check if at least one academic qualification is provided
-            if (!hasAcademicQualification) {
-                isValid = false;
-                $('#response').text("Please fill at least one academic qualification.").addClass('text-red-600');
-                return;
+            } else {
+                $(`#${prefix}_specialization`).removeClass('border-red-500');
+                $(`#${prefix}_total_marks`).removeClass('border-red-500');
+                $(`#${prefix}_board`).removeClass('border-red-500');
             }
-
-            if (!isValid) {
-                $('#response').text("Please fill all required fields for selected qualifications.").addClass('text-red-600');
-                return;
-            }
-
-            $.ajax({
-                url: "qualification_process.php",
-                type: "POST",
-                data: $('#qualification_form').serialize(),
-                beforeSend: () => $('#response').text("Processing...").removeClass('text-red-600').addClass('text-teal-600'),
-                success: (data) => {
-                    if (data == 1) {
-                        window.location.replace("post_apply.php");
-                    } else {
-                        $('#response').text(data).removeClass('text-teal-600').addClass('text-red-600');
-                    }
-                },
-                error: () => {
-                    $('#response').text("An error occurred. Please try again.").addClass('text-red-600');
-                }
-            });
         });
-    </script>
+
+        // Validate professional qualification
+        const dipNameOne = $('#dip_name_one').val();
+        const dipObtOne = $('#dip_obt_one').val();
+        const dipTotalOne = $('#dip_total_one').val();
+        const dipBoardOne = $('#dip_board_one').val();
+
+        if (dipNameOne === 'B.Ed/Equivalent') {
+            if (!dipObtOne || !dipTotalOne || !dipBoardOne) {
+                isValid = false;
+                if (!dipObtOne) $('#dip_obt_one').addClass('border-red-500');
+                if (!dipTotalOne) $('#dip_total_one').addClass('border-red-500');
+                if (!dipBoardOne) $('#dip_board_one').addClass('border-red-500');
+            } else {
+                $('#dip_obt_one').removeClass('border-red-500');
+                $('#dip_total_one').removeClass('border-red-500');
+                $('#dip_board_one').removeClass('border-red-500');
+            }
+        } else {
+            $('#dip_obt_one').removeClass('border-red-500');
+            $('#dip_total_one').removeClass('border-red-500');
+            $('#dip_board_one').removeClass('border-red-500');
+        }
+
+        // Check if at least one academic qualification is provided
+        if (!hasAcademicQualification) {
+            isValid = false;
+            $('#response').text("Please fill at least one academic qualification.").addClass('text-red-600');
+            return;
+        }
+
+        if (!isValid) {
+            $('#response').text("Please fill all required fields for selected qualifications.").addClass('text-red-600');
+            return;
+        }
+
+        $.ajax({
+            url: "qualification_process.php",
+            type: "POST",
+            data: $('#qualification_form').serialize(),
+            beforeSend: () => $('#response').text("Processing...").removeClass('text-red-600').addClass('text-teal-600'),
+            success: (data) => {
+                if (data == 1) {
+                    window.location.replace("post_apply.php");
+                } else {
+                    $('#response').text(data).removeClass('text-teal-600').addClass('text-red-600');
+                }
+            },
+            error: () => {
+                $('#response').text("An error occurred. Please try again.").addClass('text-red-600');
+            }
+        });
+    });
+</script>
 </body>
 </html>
 
