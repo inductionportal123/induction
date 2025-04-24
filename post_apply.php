@@ -146,62 +146,31 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <i class="fas fa-briefcase mr-2"></i> Post Information <span class="text-sm text-gray-500 ml-2">(* Mandatory Fields)</span>
                     </h3>
 
-                 <!-- Category I: Teaching -->
-<div class="mb-6">
-    <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS 16-17) | زمرہ I: تدریسی عملہ</h4>
-    <style>
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem; /* Space between checkboxes */
-        }
-        .checkbox-item {
-            flex: 0 0 calc(50% - 0.5rem); /* Two items per row with gap adjustment */
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .checkbox-item input {
-            margin-right: 0.5rem;
-        }
-    </style>
-    <?php
-    $quali = "SELECT * FROM `qualification` WHERE `said` = '$userid'";
-    $exequali = mysqli_query($conn, $quali);
-    $qualirow = mysqli_num_rows($exequali);
-    if ($qualirow > 0) {
-        // Query to fetch posts, ordered by BPS
-        $newquery = $user_gender == 'transgender'
-            ? "SELECT p.`pid`, p.`name`, p.`gender`, pd.`bps` 
-               FROM `posts` p 
-               INNER JOIN `post_details` pd ON p.`pid` = pd.`pid` 
-               WHERE p.`cat` = 3 
-               AND pd.`req_deg` IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16') 
-               ORDER BY pd.`bps` ASC"
-            : "SELECT p.`pid`, p.`name`, p.`gender`, pd.`bps` 
-               FROM `posts` p 
-               INNER JOIN `post_details` pd ON p.`pid` = pd.`pid` 
-               WHERE p.`cat` = 3 
-               AND pd.`req_deg` IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16') 
-               AND (p.`gender` = '$user_gender' OR p.`gender` = 'both') 
-               ORDER BY pd.`bps` ASC";
-        
-        $newexe = mysqli_query($conn, $newquery);
-        if (mysqli_num_rows($newexe) > 0) {
-            echo '<div class="checkbox-group">';
-            while ($rows = mysqli_fetch_array($newexe)) {
-                $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
-                echo "<label class='checkbox-item'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' $checked> " . strtoupper($rows['name']) . " (BPS-{$rows['bps']}, <small>" . strtoupper($rows['gender']) . "</small>)</label>";
-            }
-            echo '</div>';
-        } else {
-            echo '<p class="text-red-600">No posts available for your criteria.</p>';
-        }
-    } else {
-        echo '<p class="text-red-600">Please add <b>Qualifications</b> first.</p>';
-    }
-    ?>
-</div>
+                    <!-- Category I: Teaching -->
+                    <div class="mb-6">
+                        <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS 16-17) | زمرہ I: تدریسی عملہ</h4>
+                        <?php
+                        $quali = "SELECT * FROM `qualification` WHERE `said` = '$userid'";
+                        $exequali = mysqli_query($conn, $quali);
+                        $qualirow = mysqli_num_rows($exequali);
+                        if ($qualirow > 0) {
+                            $newquery = $user_gender == 'transgender' 
+                                ? "SELECT `pid`,`name`,`gender` FROM `posts` WHERE posts.cat = 3 AND posts.pid IN (SELECT post_details.pid FROM post_details WHERE post_details.req_deg IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16')) ORDER BY `bps` ASC"
+                                : "SELECT `pid`,`name`,`gender` FROM `posts` WHERE posts.cat = 3 AND posts.pid IN (SELECT post_details.pid FROM post_details WHERE post_details.req_deg IN ('Primary', 'Middle', 'Matric', 'Inter', 'Bachelors', 'Bachelors16')) AND (posts.gender = '$user_gender' OR posts.gender = 'both') ORDER BY `bps` ASC";
+                            $newexe = mysqli_query($conn, $newquery);
+                            if (mysqli_num_rows($newexe) > 0) {
+                                echo '<div class="checkbox-group">';
+                                while ($rows = mysqli_fetch_array($newexe)) {
+                                    $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
+                                    echo "<label class='checkbox-item flex items-center'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' class='mr-2' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . "</small>)</label>";
+                                }
+                                echo '</div>';
+                            }
+                        } else {
+                            echo '<p class="text-red-600">Please add <b>Qualifications</b> first.</p>';
+                        }
+                        ?>
+                    </div>
 
                 
                 </div>
