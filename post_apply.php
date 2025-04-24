@@ -146,178 +146,177 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <i class="fas fa-briefcase mr-2"></i> Post Information <span class="text-sm text-gray-500 ml-2">(* Mandatory Fields)</span>
                     </h3>
 
-<!-- Category I: Teaching (BPS-17) -->
-<div class="mb-6">
-    <h4 class="text-teal-600 font-semibold mb-2">Category II: Teaching (BPS-17) | زمرہ I: تدریسی عملہ</h4>
-    <?php
-    // Re-run the same qualification logic for BPS-17
-    if ($qualirow > 0) {
-        // Use the same $eligible_degrees and $eligible_degrees_str from above
-        if (empty($eligible_degrees)) {
-            echo '<p class="text-red-600">No valid qualifications found. Please add qualifications first.</p>';
-        } else {
-            // Query to fetch eligible posts for BPS-17
-            $newquery = $user_gender == 'transgender'
-                ? "SELECT p.pid, p.name, p.gender, p.bps 
-                   FROM posts p
-                   JOIN post_details pd ON p.pid = pd.pid
-                   WHERE p.cat = 3 
-                   AND pd.req_deg IN ($eligible_degrees_str)
-                   AND p.bps = 17
-                   ORDER BY p.bps ASC"
-                : "SELECT p.pid, p.name, p.gender, p.bps 
-                   FROM posts p
-                   JOIN post_details pd ON p.pid = pd.pid
-                   WHERE p.cat = 3 
-                   AND pd.req_deg IN ($eligible_degrees_str)
-                   AND (p.gender = '$user_gender' OR p.gender = 'both') 
-                   AND p.bps = 17
-                   ORDER BY p.bps ASC";
 
-            $newexe = mysqli_query($conn, $newquery);
-            if (mysqli_num_rows($newexe) > 0) {
-                echo '<div class="checkbox-group">';
-                while ($rows = mysqli_fetch_array($newexe)) {
-                    $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
-                    echo "<label class='checkbox-item'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . ", BPS-{$rows['bps']}</small>)</label>";
-                }
-                echo '</div>';
-            } else {
-                echo '<p class="text-red-600">No BPS-17 posts available for your qualifications.</p>';
-            }
-        }
-    } else {
-        echo '<p class="text-red-600">Please add <b>Qualifications</b> first.</p>';
-    }
-    ?>
-</div>
+                        <!-- Category I: Teaching (BPS-16) -->
+                        <div class="mb-6">
+                            <h4 class="text-teal-600 font-semibold mb-2">Category II: Teaching (BPS-16) | زمرہ II: تدریسی عملہ</h4>
+                            <style>
+                                .checkbox-group {
+                                    display: flex;
+                                    flex-wrap: wrap;
+                                    gap: 1rem;
+                                }
+                                .checkbox-item {
+                                    flex: 0 0 calc(50% - 0.5rem);
+                                    display: flex;
+                                    align-items: center;
+                                    margin-bottom: 0.5rem;
+                                    padding: 0.5rem;
+                                    box-sizing: border-box;
+                                }
+                                .checkbox-item input {
+                                    margin-right: 0.5rem;
+                                }
+                                @media (max-width: 600px) {
+                                    .checkbox-item {
+                                        flex: 0 0 100%;
+                                    }
+                                }
+                            </style>
+                            <?php
+                            // Check if user has qualifications
+                            $quali = "SELECT bs_title, bs16_title, ms_title, primary_title 
+                                    FROM qualification 
+                                    WHERE said = '$userid'";
+                            $exequali = mysqli_query($conn, $quali);
+                            $qualirow = mysqli_num_rows($exequali);
 
-<!-- Category I: Teaching (BPS-16) -->
-<div class="mb-6">
-    <h4 class="text-teal-600 font-semibold mb-2">Category II: Teaching (BPS-16) | زمرہ II: تدریسی عملہ</h4>
-    <style>
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .checkbox-item {
-            flex: 0 0 calc(50% - 0.5rem);
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
-            padding: 0.5rem;
-            box-sizing: border-box;
-        }
-        .checkbox-item input {
-            margin-right: 0.5rem;
-        }
-        @media (max-width: 600px) {
-            .checkbox-item {
-                flex: 0 0 100%;
-            }
-        }
-    </style>
-    <?php
-    // Check if user has qualifications
-    $quali = "SELECT bs_title, bs16_title, ms_title, primary_title 
-              FROM qualification 
-              WHERE said = '$userid'";
-    $exequali = mysqli_query($conn, $quali);
-    $qualirow = mysqli_num_rows($exequali);
+                            if ($qualirow > 0) {
+                                // Fetch qualifications
+                                $qual_data = mysqli_fetch_array($exequali);
 
-    if ($qualirow > 0) {
-        // Fetch qualifications
-        $qual_data = mysqli_fetch_array($exequali);
+                                // Define degree levels
+                                $degree_levels = [
+                                    'Primary' => 1,
+                                    'Middle' => 2,
+                                    'Matric' => 3,
+                                    'Inter' => 4,
+                                    'Bachelors' => 5,
+                                    'Bachelors16' => 6,
+                                    'MS' => 7,
+                                    'PhD' => 8
+                                ];
 
-        // Define degree levels
-        $degree_levels = [
-            'Primary' => 1,
-            'Middle' => 2,
-            'Matric' => 3,
-            'Inter' => 4,
-            'Bachelors' => 5,
-            'Bachelors16' => 6,
-            'MS' => 7,
-            'PhD' => 8
-        ];
+                                // Determine highest degree
+                                $highest_degree_level = 0;
+                                $degrees_obtained = [];
 
-        // Determine highest degree
-        $highest_degree_level = 0;
-        $degrees_obtained = [];
+                                if (!empty($qual_data['bs_title'])) {
+                                    $degrees_obtained[] = 'Bachelors';
+                                }
+                                if (!empty($qual_data['bs16_title'])) {
+                                    $degrees_obtained[] = 'Bachelors16';
+                                }
+                                if (!empty($qual_data['ms_title'])) {
+                                    $degrees_obtained[] = 'MS';
+                                }
+                                if (!empty($qual_data['primary_title'])) {
+                                    $degrees_obtained[] = 'PhD';
+                                }
 
-        if (!empty($qual_data['bs_title'])) {
-            $degrees_obtained[] = 'Bachelors';
-        }
-        if (!empty($qual_data['bs16_title'])) {
-            $degrees_obtained[] = 'Bachelors16';
-        }
-        if (!empty($qual_data['ms_title'])) {
-            $degrees_obtained[] = 'MS';
-        }
-        if (!empty($qual_data['primary_title'])) {
-            $degrees_obtained[] = 'PhD';
-        }
+                                // Find the highest degree level
+                                foreach ($degrees_obtained as $degree) {
+                                    if (isset($degree_levels[$degree]) && $degree_levels[$degree] > $highest_degree_level) {
+                                        $highest_degree_level = $degree_levels[$degree];
+                                    }
+                                }
 
-        // Find the highest degree level
-        foreach ($degrees_obtained as $degree) {
-            if (isset($degree_levels[$degree]) && $degree_levels[$degree] > $highest_degree_level) {
-                $highest_degree_level = $degree_levels[$degree];
-            }
-        }
+                                // Convert highest degree level back to degree names for the query
+                                $eligible_degrees = [];
+                                foreach ($degree_levels as $degree => $level) {
+                                    if ($level <= $highest_degree_level) {
+                                        $eligible_degrees[] = $degree;
+                                    }
+                                }
 
-        // Convert highest degree level back to degree names for the query
-        $eligible_degrees = [];
-        foreach ($degree_levels as $degree => $level) {
-            if ($level <= $highest_degree_level) {
-                $eligible_degrees[] = $degree;
-            }
-        }
+                                // If no degrees found, show message
+                                if (empty($eligible_degrees)) {
+                                    echo '<p class="text-red-600">No valid qualifications found. Please add qualifications first.</p>';
+                                } else {
+                                    // Convert eligible degrees to a string for the SQL query
+                                    $eligible_degrees_str = "'" . implode("','", $eligible_degrees) . "'";
 
-        // If no degrees found, show message
-        if (empty($eligible_degrees)) {
-            echo '<p class="text-red-600">No valid qualifications found. Please add qualifications first.</p>';
-        } else {
-            // Convert eligible degrees to a string for the SQL query
-            $eligible_degrees_str = "'" . implode("','", $eligible_degrees) . "'";
+                                    // Query to fetch eligible posts for BPS-16
+                                    $newquery = $user_gender == 'transgender'
+                                        ? "SELECT p.pid, p.name, p.gender, p.bps 
+                                        FROM posts p
+                                        JOIN post_details pd ON p.pid = pd.pid
+                                        WHERE p.cat = 3 
+                                        AND pd.req_deg IN ($eligible_degrees_str)
+                                        AND p.bps = 16
+                                        ORDER BY p.bps ASC"
+                                        : "SELECT p.pid, p.name, p.gender, p.bps 
+                                        FROM posts p
+                                        JOIN post_details pd ON p.pid = pd.pid
+                                        WHERE p.cat = 3 
+                                        AND pd.req_deg IN ($eligible_degrees_str)
+                                        AND (p.gender = '$user_gender' OR p.gender = 'both') 
+                                        AND p.bps = 16
+                                        ORDER BY p.bps ASC";
 
-            // Query to fetch eligible posts for BPS-16
-            $newquery = $user_gender == 'transgender'
-                ? "SELECT p.pid, p.name, p.gender, p.bps 
-                   FROM posts p
-                   JOIN post_details pd ON p.pid = pd.pid
-                   WHERE p.cat = 3 
-                   AND pd.req_deg IN ($eligible_degrees_str)
-                   AND p.bps = 16
-                   ORDER BY p.bps ASC"
-                : "SELECT p.pid, p.name, p.gender, p.bps 
-                   FROM posts p
-                   JOIN post_details pd ON p.pid = pd.pid
-                   WHERE p.cat = 3 
-                   AND pd.req_deg IN ($eligible_degrees_str)
-                   AND (p.gender = '$user_gender' OR p.gender = 'both') 
-                   AND p.bps = 16
-                   ORDER BY p.bps ASC";
+                                    $newexe = mysqli_query($conn, $newquery);
+                                    if (mysqli_num_rows($newexe) > 0) {
+                                        echo '<div class="checkbox-group">';
+                                        while ($rows = mysqli_fetch_array($newexe)) {
+                                            $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
+                                            echo "<label class='checkbox-item'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . ", BPS-{$rows['bps']}</small>)</label>";
+                                        }
+                                        echo '</div>';
+                                    } else {
+                                        echo '<p class="text-red-600">No BPS-16 posts available for your qualifications.</p>';
+                                    }
+                                }
+                            } else {
+                                echo '<p class="text-red-600">Please add <b>Qualifications</b> first.</p>';
+                            }
+                            ?>
+                        </div>
 
-            $newexe = mysqli_query($conn, $newquery);
-            if (mysqli_num_rows($newexe) > 0) {
-                echo '<div class="checkbox-group">';
-                while ($rows = mysqli_fetch_array($newexe)) {
-                    $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
-                    echo "<label class='checkbox-item'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . ", BPS-{$rows['bps']}</small>)</label>";
-                }
-                echo '</div>';
-            } else {
-                echo '<p class="text-red-600">No BPS-16 posts available for your qualifications.</p>';
-            }
-        }
-    } else {
-        echo '<p class="text-red-600">Please add <b>Qualifications</b> first.</p>';
-    }
-    ?>
-</div>
+                        <!-- Category I: Teaching (BPS-17) -->
+                        <div class="mb-6">
+                            <h4 class="text-teal-600 font-semibold mb-2">Category II: Teaching (BPS-17) | زمرہ I: تدریسی عملہ</h4>
+                            <?php
+                            // Re-run the same qualification logic for BPS-17
+                            if ($qualirow > 0) {
+                                // Use the same $eligible_degrees and $eligible_degrees_str from above
+                                if (empty($eligible_degrees)) {
+                                    echo '<p class="text-red-600">No valid qualifications found. Please add qualifications first.</p>';
+                                } else {
+                                    // Query to fetch eligible posts for BPS-17
+                                    $newquery = $user_gender == 'transgender'
+                                        ? "SELECT p.pid, p.name, p.gender, p.bps 
+                                        FROM posts p
+                                        JOIN post_details pd ON p.pid = pd.pid
+                                        WHERE p.cat = 3 
+                                        AND pd.req_deg IN ($eligible_degrees_str)
+                                        AND p.bps = 17
+                                        ORDER BY p.bps ASC"
+                                        : "SELECT p.pid, p.name, p.gender, p.bps 
+                                        FROM posts p
+                                        JOIN post_details pd ON p.pid = pd.pid
+                                        WHERE p.cat = 3 
+                                        AND pd.req_deg IN ($eligible_degrees_str)
+                                        AND (p.gender = '$user_gender' OR p.gender = 'both') 
+                                        AND p.bps = 17
+                                        ORDER BY p.bps ASC";
 
-
+                                    $newexe = mysqli_query($conn, $newquery);
+                                    if (mysqli_num_rows($newexe) > 0) {
+                                        echo '<div class="checkbox-group">';
+                                        while ($rows = mysqli_fetch_array($newexe)) {
+                                            $checked = !empty($post_apply_data) && in_array($rows["pid"], $post_apply_data) ? 'checked' : '';
+                                            echo "<label class='checkbox-item'><input type='checkbox' name='post_apply[]' value='{$rows['pid']}' $checked> " . strtoupper($rows['name']) . " (<small>" . strtoupper($rows['gender']) . ", BPS-{$rows['bps']}</small>)</label>";
+                                        }
+                                        echo '</div>';
+                                    } else {
+                                        echo '<p class="text-red-600">No BPS-17 posts available for your qualifications.</p>';
+                                    }
+                                }
+                            } else {
+                                echo '<p class="text-red-600">Please add <b>Qualifications</b> first.</p>';
+                            }
+                            ?>
+                        </div>
 
 
                 
