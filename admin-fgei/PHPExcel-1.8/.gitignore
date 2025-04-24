@@ -1,3 +1,4 @@
+connection/conn.php
 build/PHPExcel.phar
 unitTests/codeCoverage
 analysis
