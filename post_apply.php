@@ -273,7 +273,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 
 <!-- Category I: Teaching (BPS-17) -->
 <div class="mb-6">
-    <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS-17) | زمرہ I: تدریسی عملہ</h4>
+    <h4 class="text-teal-600 font-semibold mb-2">Category II: Teaching (BPS-17) | زمرہ I: تدریسی عملہ</h4>
     <?php
     // Re-run the same qualification logic for BPS-17
     if ($qualirow > 0) {
