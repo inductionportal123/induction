@@ -10,24 +10,18 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     $user = $_SESSION['u_name'];
     $userid = $_SESSION['u_id'];
 
-    $fee_detail_query = "SELECT * FROM `fee_detial` WHERE s_id = ?";
-    $stmt = mysqli_prepare($conn, $fee_detail_query);
-    mysqli_stmt_bind_param($stmt, "s", $userid);
-    mysqli_stmt_execute($stmt);
-    $ex2 = mysqli_stmt_get_result($stmt);
+    $fee_detail_query = "SELECT * FROM `fee_detial` WHERE s_id = '$userid'";
+    $ex2 = mysqli_query($conn, $fee_detail_query);
     $ro2 = mysqli_fetch_array($ex2);
-    mysqli_stmt_close($stmt);
 
-    $que = "SELECT * FROM `emp_document` WHERE said = ?";
-    $stmt = mysqli_prepare($conn, $que);
-    mysqli_stmt_bind_param($stmt, "s", $userid);
-    mysqli_stmt_execute($stmt);
-    $ex = mysqli_stmt_get_result($stmt);
+    $que = "SELECT * FROM `emp_document` WHERE said = '$userid'";
+    $ex = mysqli_query($conn, $que);
     $ro = mysqli_fetch_array($ex);
+   
     $rowcount = mysqli_num_rows($ex);
-    mysqli_stmt_close($stmt);
 
     if ($rowcount >= 1) {
+        $profile_picture=$ro['image'];
         $dataset = "ok";
         $documentmesg = "You have successfully uploaded documents.";
     }
@@ -64,44 +58,22 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 </head>
 <body class="bg-stone-50 font-sans antialiased">
     <!-- Header -->
-    <?php include 'header.php'; ?>
-    <?php include 'sidebar.php'; ?>
+     <?php include 'header.php'; ?>
+
+  <?php include 'sidebar.php'; ?>
     <!-- Main Content -->
     <main class="p-8 pt-24 w-full max-w-7xl mx-auto md:ml-72">
         <div class="bg-white p-8 rounded-xl shadow-lg">
-            <?php include 'registration_form.php'; ?>
+
+                    <?php include 'registration_form.php'; ?>
+
             <!-- Document Upload Content -->
             <div class="card p-6 rounded-lg">
                 <h3 class="text-lg font-semibold text-teal-700 mb-4 flex items-center">
                     <i class="fas fa-file-upload mr-2"></i> Upload Documents | دستاویزات اپ لوڈ کریں
                 </h3>
 
-                <!-- Display All Uploaded Images -->
-                <?php if ($rowcount >= 1) { ?>
-                    <div class="mb-6">
-                        <h4 class="text-teal-600 font-semibold mb-2">Your Uploaded Documents</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                            <?php
-                            $image_fields = [
-                                'image' => 'Passport Size Image',
-                                'recipt' => 'Receipt of Challan Form',
-                                'cnic' => 'CNIC (Front Side)',
-                                'professional_degree' => 'Professional Degree',
-                                'driving_license' => 'Driving License'
-                            ];
-                            foreach ($image_fields as $field => $label) {
-                                if (!empty($ro[$field])) {
-                                    echo '<div class="flex flex-col items-center">';
-                                    echo '<img src="' . htmlspecialchars($ro[$field]) . '" alt="' . htmlspecialchars($label) . '" class="uploaded-image">';
-                                    echo '<p class="text-sm text-gray-600 mt-2">' . htmlspecialchars($label) . '</p>';
-                                    echo '</div>';
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                <?php } ?>
-
+            
                 <?php if (!$ro2) { ?>
                     <!-- Transaction Details Form -->
                     <form action="storeTransaction.php" method="POST" class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
@@ -161,20 +133,14 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 
                         <!-- Bank Challan Receipt -->
                         <?php
-                        $postid = "SELECT post_apply.post_apply FROM post_apply WHERE post_apply.said = ?";
-                        $stmt = mysqli_prepare($conn, $postid);
-                        mysqli_stmt_bind_param($stmt, "s", $userid);
-                        mysqli_stmt_execute($stmt);
-                        $idexe = mysqli_stmt_get_result($stmt);
+                        $postid = "SELECT post_apply.post_apply FROM post_apply WHERE post_apply.said='$userid'";
+                        $idexe = mysqli_query($conn, $postid);
                         $iddata = mysqli_fetch_array($idexe);
                         $ppid = $iddata['post_apply'];
                         $str_arr = explode(",", $ppid);
                         foreach ($str_arr as $postids) {
-                            $postapply = "SELECT SUM(fee_slot.fee) AS total FROM fee_slot WHERE fee_slot.post_id = ?";
-                            $stmt = mysqli_prepare($conn, $postapply);
-                            mysqli_stmt_bind_param($stmt, "s", $postids);
-                            mysqli_stmt_execute($stmt);
-                            $postexe = mysqli_stmt_get_result($stmt);
+                            $postapply = "SELECT SUM(fee_slot.fee) AS total FROM fee_slot WHERE fee_slot.post_id ='$postids'";
+                            $postexe = mysqli_query($conn, $postapply);
                             $postdata = mysqli_fetch_array($postexe);
                             if ($postdata['total'] > 0) {
                         ?>
@@ -197,7 +163,6 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <?php
                                 break;
                             }
-                            mysqli_stmt_close($stmt);
                         }
                         ?>
 
@@ -230,11 +195,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <!-- Professional Degree (Conditional) -->
                         <?php
                         foreach ($str_arr as $postids) {
-                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = ?";
-                            $stmt = mysqli_prepare($conn, $postapply);
-                            mysqli_stmt_bind_param($stmt, "s", $postids);
-                            mysqli_stmt_execute($stmt);
-                            $postexe = mysqli_stmt_get_result($stmt);
+                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = '$postids'";
+                            $postexe = mysqli_query($conn, $postapply);
                             $postrow = mysqli_num_rows($postexe);
                             if ($postrow > 0) {
                                 while ($postdata = mysqli_fetch_array($postexe)) {
@@ -259,18 +221,14 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                     }
                                 }
                             }
-                            mysqli_stmt_close($stmt);
                         }
                         ?>
 
                         <!-- Driving License (Conditional) -->
                         <?php
                         foreach ($str_arr as $postids) {
-                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = ?";
-                            $stmt = mysqli_prepare($conn, $postapply);
-                            mysqli_stmt_bind_param($stmt, "s", $postids);
-                            mysqli_stmt_execute($stmt);
-                            $postexe = mysqli_stmt_get_result($stmt);
+                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = '$postids'";
+                            $postexe = mysqli_query($conn, $postapply);
                             $postrow = mysqli_num_rows($postexe);
                             if ($postrow > 0) {
                                 while ($postdata = mysqli_fetch_array($postexe)) {
@@ -295,7 +253,6 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                     }
                                 }
                             }
-                            mysqli_stmt_close($stmt);
                         }
                         ?>
 
@@ -330,6 +287,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         const close = document.getElementById('sidebar-close');
         toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
         close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
+
+    
 
         // Transaction Detail Toggle
         $('#type').change(function() {
