@@ -32,11 +32,11 @@ $list = '';
     
     
     if ($ppp == 1 && ($dt == 'NULL' || $dt == '' || $dt == NULL)) {
+
+        echo "<script>alert('Professional Degree required for " . $opendata1['name'] . " Post. Please Complete Professional Degree Portion from Qulification ');
+        window.location.replace('post_apply.php');</script>";
         ?>
-        <script>
-            alert("Professional Degree required for <?php echo $opendata1['name']; ?> Post. Please Complete Professional Degree Portion from Qualification ");
-            window.location.replace("post_apply.php");
-        </script>
+       
         <?php
     }
         else{
