@@ -18,23 +18,46 @@ $list = '';
          
         foreach ($_POST['post_apply'] as $post1) {
             
-    $check_pro_enter = "SELECT qualification.matric_title,qualification.primary_title,qualification.middle_title,qualification.inter_title,qualification.bs_title,qualification.bs16_title, qualification.profes_certificate FROM qualification WHERE said = '$userid'";
+    $check_pro_enter = "SELECT qualification.matric_title,qualification.primary_title,qualification.middle_title,qualification.inter_title,qualification.bs_title,qualification.bs16_title, qualification.profes_result_date, 
+    qualification.profes_obtained_marks,qualification.profes_total_marks FROM qualification WHERE said = '$userid'";
     $pro_check = mysqli_query($conn, $check_pro_enter);
     $opendata2 = mysqli_fetch_array($pro_check);
 
-    $check_pro_degree = "SELECT posts.name, posts.professional_degree_required FROM posts WHERE pid = '$post1'";
-    $pro_exe = mysqli_query($conn, $check_pro_degree);
-    $opendata1 = mysqli_fetch_array($pro_exe);
-    $ppp = $opendata1['professional_degree_required'];
-    $dt = $opendata2['profes_certificate'];
-    $matric= $opendata2['matric_title'];
+    // Assign variables
+$dt = $opendata2['profes_certificate'] ?? null;
+$profes_result_date = $opendata2['profes_result_date'] ?? null;
+$profes_obtained_marks = $opendata2['profes_obtained_marks'] ?? null;
+$profes_total_marks = $opendata2['profes_total_marks'] ?? null;
+$profes_board = $opendata2['profes_board'] ?? null;
 
+// Validate if professional degree is required and all fields are provided
+if ($ppp == 1) {
+    $missing_fields = [];
     
-    
-    if ($ppp == 1 && (is_null($dt) || $dt === '')) {
-        echo 'A Professional Degree is required for the ' . htmlspecialchars($opendata1['name']) . ' position.
-         Please complete the Professional Degree section in your Qualification Section.';
+    if (is_null($dt) || $dt === '') {
+        $missing_fields[] = 'Degree';
     }
+    if (is_null($profes_obtained_marks) || $profes_obtained_marks === '') {
+        $missing_fields[] = 'Obtained Marks';
+    }
+    if (is_null($profes_total_marks) || $profes_total_marks === '') {
+        $missing_fields[] = 'Total Marks';
+    }
+    if (is_null($profes_board) || $profes_board === '') {
+        $missing_fields[] = 'Board/University';
+    }
+    // Optionally validate profes_result_date
+    if (is_null($profes_result_date) || $profes_result_date === '') {
+        $missing_fields[] = 'Result Date';
+    }
+
+    if (!empty($missing_fields)) {
+        echo 'A Professional Degree is required for the ' . htmlspecialchars($opendata1['name']) . ' position. 
+              Please complete the following fields in your Qualification Section: ' . implode(', ', $missing_fields) . '.';
+    } else {
+        echo 'All required professional degree fields are provided.';
+    }
+}
         else{
  
           $opencheck = "SELECT nonteachingstaff.open_merit FROM `nonteachingstaff` WHERE nonteachingstaff.pid = '$post1'";
