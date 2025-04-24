@@ -43,37 +43,37 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
 		<ul class="nav menu">
             <li class="parent ">
                 <a data-toggle="collapse" href="#sub-item-4">
-				<em class="fa fa-navicon">&nbsp;</em> Applications <span data-toggle="collapse" href="#sub-item-4" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> Applications <span data-toggle="collapse" href="#sub-item-4" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-4">
 					<li><a class="" href="allapplication.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> All Applications
+						<span class="fa fa-arrow-right"> </span> All Applications
 					</a></li>
 					<li><a class="" href="approvedemp.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> Approved Applications
+						<span class="fa fa-arrow-right"> </span> Approved Applications
 					</a></li>
 					<li><a class="" href="rejected.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> Rejected Applications
+						<span class="fa fa-arrow-right"> </span> Rejected Applications
 					</a></li>
                     <li><a class="" href="pending.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> Pending Applications
+						<span class="fa fa-arrow-right"> </span> Pending Applications
 					</a></li>
 				</ul>
 			</li>
             <li class="parent ">
                 <a  data-toggle="collapse" href="#sub-item-5">
-				<em class="fa fa-navicon">&nbsp;</em> Reports <span data-toggle="collapse" href="#sub-item-5" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> Reports <span data-toggle="collapse" href="#sub-item-5" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-5">
-					<li><a href="summaryreport.php"><em class="fa fa-list-ol">&nbsp;</em> Report</a></li>
-                    <li><a href="center_report.php"><em class="fa fa-list-ol">&nbsp;</em> Center Report</a></li>
+					<li><a href="summaryreport.php"><em class="fa fa-list-ol"> </em> Report</a></li>
+                    <li><a href="center_report.php"><em class="fa fa-list-ol"> </em> Center Report</a></li>
 				</ul>
 			</li>
             
             <li><a href="passwordchange.php"><i class="fa fa-key" aria-hidden="true"></i>
  Change Password</a></li>
-            <li class="active" ><a href="query.php"><em class="fa fa-question-circle">&nbsp;</em> Queries</a></li>
-            <li><a href="logout.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+            <li class="active" ><a href="query.php"><em class="fa fa-question-circle"> </em> Queries</a></li>
+            <li><a href="logout.php"><em class="fa fa-power-off"> </em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 <?php
@@ -96,71 +96,71 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
 		<ul class="nav menu">
             <li class="parent ">
                 <a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> General Settings <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> General Settings <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
-                    <li class="active"><a href="admissiondate.php"><em class="fa fa-book">&nbsp;</em> Induction Settings</a></li>
-					<li><a href="region.php"><em class="fa fa-globe">&nbsp;</em> Region Setting</a></li>
-                    <li><a href="region_setting.php"><em class="fa fa-globe">&nbsp;</em> Region Details</a></li>
-                    <li><a href="district.php"><em class="fa fa-map-marker">&nbsp;</em> District Setting</a></li>   <li><a href="bankfee.php"><em class="fa fa-credit-card">&nbsp;</em> Bank Charges</a></li>
-                    <li><a href="centers.php"><em class="fa fa-university">&nbsp;</em> Centers</a></li>
+                    <li class="active"><a href="admissiondate.php"><em class="fa fa-book"> </em> Induction Settings</a></li>
+					<li><a href="region.php"><em class="fa fa-globe"> </em> Region Setting</a></li>
+                    <li><a href="region_setting.php"><em class="fa fa-globe"> </em> Region Details</a></li>
+                    <li><a href="district.php"><em class="fa fa-map-marker"> </em> District Setting</a></li>   <li><a href="bankfee.php"><em class="fa fa-credit-card"> </em> Bank Charges</a></li>
+                    <li><a href="centers.php"><em class="fa fa-university"> </em> Centers</a></li>
 				</ul>
 			</li>
             <li class="parent ">
                 <a data-toggle="collapse" href="#sub-item-2">
-				<em class="fa fa-navicon">&nbsp;</em> Post Settings <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> Post Settings <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-2">
-                    <li><a href="createpost.php"><em class="fa fa-laptop">&nbsp;</em> Posts</a></li>
-                    <li><a href="category.php"><em class="fa fa-laptop">&nbsp;</em> Post Details</a></li>
-					<li><a href="feeslot.php"><em class="fa fa-money">&nbsp;</em> Fee Slots</a></li>
+                    <li><a href="createpost.php"><em class="fa fa-laptop"> </em> Posts</a></li>
+                    <li><a href="category.php"><em class="fa fa-laptop"> </em> Post Details</a></li>
+					<li><a href="feeslot.php"><em class="fa fa-money"> </em> Fee Slots</a></li>
 				</ul>
 			</li>
             <li class="parent ">
                 <a data-toggle="collapse" href="#sub-item-3">
-				<em class="fa fa-navicon">&nbsp;</em> Quota Settings <span data-toggle="collapse" href="#sub-item-3" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> Quota Settings <span data-toggle="collapse" href="#sub-item-3" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-3">
-                    <li><a class="" href="nonteachingquota.php"><span class="fa fa-arrow-right">&nbsp;</span> Teaching/Non Teaching Staff</a></li>
-					<li><a class="" href="lowerstaffquota.php"><span class="fa fa-arrow-right">&nbsp;</span> Lower Staff</a></li>
+                    <li><a class="" href="nonteachingquota.php"><span class="fa fa-arrow-right"> </span> Teaching/Non Teaching Staff</a></li>
+					<li><a class="" href="lowerstaffquota.php"><span class="fa fa-arrow-right"> </span> Lower Staff</a></li>
 				</ul>
 			</li>
             <li class="parent ">
                 <a data-toggle="collapse" href="#sub-item-4">
-				<em class="fa fa-navicon">&nbsp;</em> Applications <span data-toggle="collapse" href="#sub-item-4" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> Applications <span data-toggle="collapse" href="#sub-item-4" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-4">
 					<li><a class="" href="allapplication.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> All Applications
+						<span class="fa fa-arrow-right"> </span> All Applications
 					</a></li>
 					<li><a class="" href="approvedemp.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> Approved Applications
+						<span class="fa fa-arrow-right"> </span> Approved Applications
 					</a></li>
 					<li><a class="" href="rejected.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> Rejected Applications
+						<span class="fa fa-arrow-right"> </span> Rejected Applications
 					</a></li>
                     <li><a class="" href="pending.php">
-						<span class="fa fa-arrow-right">&nbsp;</span> Pending Applications
+						<span class="fa fa-arrow-right"> </span> Pending Applications
 					</a></li>
 				</ul>
 			</li>
             <li class="parent ">
                 <a  data-toggle="collapse" href="#sub-item-5">
-				<em class="fa fa-navicon">&nbsp;</em> Reports <span data-toggle="collapse" href="#sub-item-5" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> Reports <span data-toggle="collapse" href="#sub-item-5" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-5">
-					<li><a href="summaryreport.php"><em class="fa fa-list-ol">&nbsp;</em> Report</a></li>
-                    <li><a href="center_report.php"><em class="fa fa-list-ol">&nbsp;</em> Center Report</a></li>
+					<li><a href="summaryreport.php"><em class="fa fa-list-ol"> </em> Report</a></li>
+                    <li><a href="center_report.php"><em class="fa fa-list-ol"> </em> Center Report</a></li>
 				</ul>
 			</li>
-            <li><a href="centerallot.php"><em class="fa fa-university">&nbsp;</em> Center Allotment</a></li>
+            <li><a href="centerallot.php"><em class="fa fa-university"> </em> Center Allotment</a></li>
             <li class="parent ">
                 <a data-toggle="collapse" href="#sub-item-6">
-				<em class="fa fa-navicon">&nbsp;</em> Test/Interview Scheduling<span data-toggle="collapse" href="#sub-item-6" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				<em class="fa fa-navicon"> </em> Test/Interview Scheduling<span data-toggle="collapse" href="#sub-item-6" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-6">
-                    <li><a href="schedule.php"><em class="fa fa-calendar-check-o">&nbsp;</em> Test Schedule</a></li>
-                    <li><a href="interviewslots.php"><em class="fa fa-calendar-check-o">&nbsp;</em> Interview Schedule</a></li>
+                    <li><a href="schedule.php"><em class="fa fa-calendar-check-o"> </em> Test Schedule</a></li>
+                    <li><a href="interviewslots.php"><em class="fa fa-calendar-check-o"> </em> Interview Schedule</a></li>
 				</ul>
 			</li>
             <li><a href="importresult.php"><i class="fa fa-list-alt" aria-hidden="true"></i> Selected Candidates</a></li>
@@ -168,16 +168,14 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
             <li><a href="createusers.php"><i class="fa fa-user-circle" aria-hidden="true"></i> Manage Users</a></li>
             <li><a href="passwordchange.php"><i class="fa fa-key" aria-hidden="true"></i>
  Change Password</a></li>
-            <li class="active" ><a href="query.php"><em class="fa fa-question-circle">&nbsp;</em> Queries</a></li>
-            <li><a href="message.php"><em class="fa fa-question-circle">&nbsp;</em> Announcements</a></li>
-            <li><a href="logout.php"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+            <li class="active" ><a href="query.php"><em class="fa fa-question-circle"> </em> Queries</a></li>
+            <li><a href="message.php"><em class="fa fa-question-circle"> </em> Announcements</a></li>
+            <li><a href="logout.php"><em class="fa fa-power-off"> </em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
     <?php
     }
     ?>
-    
-    
     
 <div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-4 main">
     <div class="row">
@@ -203,10 +201,10 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
     $from = $offset+1;
     $to = $offset+$no_of_records_per_page;
     $counter = $from-1;
-    $query2 = "SELECT acount_details.email,acount_details.cnic , query.query,query.picture , query.q_time , query.ans , query.f_time , query.id FROM `acount_details`,`query`  WHERE query.said=acount_details.id AND query.ans IS NULL ORDER BY `query`.`id`  DESC LIMIT $offset, $no_of_records_per_page  ";
+    $query2 = "SELECT acount_details.email,acount_details.cnic , query.query,query.picture , query.q_time , query.ans , query.f_time , query.id, query.ansPicture FROM `acount_details`,`query`  WHERE query.said=acount_details.id AND query.ans IS NULL ORDER BY `query`.`id`  DESC LIMIT $offset, $no_of_records_per_page  ";
     $exe2 = mysqli_query($conn,$query2);
     if (!$exe2){
-        echo die(mysql_error($conn));
+        echo die(mysqli_error($conn));
     }
     else{
         $rowcount2 = mysqli_num_rows($exe2);
@@ -237,10 +235,9 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
                     <td style="text-align: center;"><?= strtoupper($rows['query'].'<br>('.$rows['q_time'].')') ?></td>
                     <td>
     <?php
-// Check if a picture is available
+        // Check if a picture is available
         if (!empty($rows['picture'])) {
             ?>
-           
             <a href="<?php echo '../'. $rows['picture'] ?>" target="_blank">
             <img src="<?php echo '../'. $rows['picture'] ?>" style="max-width: 100px; max-height: 100px;">
         </a><br>     
@@ -256,6 +253,10 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
                         else
                         {
                             echo strtoupper($rows['ans'].'<br>('.$rows['f_time'].')');
+                            // Display ansPicture if it exists
+                            if (!empty($rows['ansPicture']) && $rows['ansPicture'] !== "NULL") {
+                                echo '<br><a href="' . $rows['ansPicture'] . '" target="_blank"><img src="' . $rows['ansPicture'] . '" style="max-width: 100px; max-height: 100px;"></a>';
+                            }
                         } 
                     ?>
                     </td>
@@ -268,7 +269,7 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">Replying to Query</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true">×</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -276,60 +277,71 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
                                 <input class="form-control" type="hidden" name="id" value="<?php echo $rows['id'];?>" />
                                 <textarea class="form-control" name="feedback" required><?php echo $rows['ans']?></textarea>
                                 <br>
-                                <input  type="file" name="AdminPicture" value='Attach File' style="margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; box-sizing: border-box;">
-
+                                <input type="file" name="AdminPicture" style="margin-top: 10px; padding: 10px; border-radius: 8px; border: 1px solid #ccc; width: 100%; box-sizing: border-box;">
                                 <button style="float-right" type="submit" name="submit" class="btn btn-primary">Send Reply</button>
                             </form>
-                                <?php
-              if ($_SERVER['REQUEST_METHOD'] == 'POST')
-              {
-                if(isset($_POST['submit'])) {
-                    date_default_timezone_set("Asia/Karachi");
-                    $time = date("Y-m-d h:i:sa");
-                    $id = $_POST['id']; 
-                    $feedback = $_POST['feedback']; 
-            
-                    // Check if AdminPicture is set and uploaded
-                    if(isset($_FILES['AdminPicture']) && $_FILES['AdminPicture']['error'] === UPLOAD_ERR_OK) {
-                        $picture = $_FILES['AdminPicture']['name'];
-                        $temp_file = $_FILES['AdminPicture']['tmp_name'];
-                        $uploads_directory = "../uploads/"; // Specify your upload directory
-                        $upload_path = $uploads_directory . $picture;
-            
-                        // Move uploaded file to specified directory
-                        if (move_uploaded_file($temp_file, $upload_path)) {
-                            $picture_path = $upload_path;
-                        } else {
-                            // Failed to move uploaded file
-                            echo "Error uploading file.";
-                            $picture_path = "NULL";
-                        }
-                    } else {
-                        // No file uploaded
-                        $picture_path = "NULL";
-                    }
-            
-                    // Update the database with feedback and picture path
-                    $sql = "UPDATE query SET ans=?, ansPicture=?, f_time=? WHERE id=?";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("sssi", $feedback, $picture_path, $time, $id);
-                    
-                    if ($stmt->execute()) {
-                        // Redirect to querypending.php with appropriate page number
-                        if(isset($pageno)) {
-                            header('location: querypending.php?pageno=' . $pageno);
-                        } else {
-                            header('location: querypending.php');
-                        }
-                        exit(); // Always exit after header redirection
-                    } else {
-                        // Error occurred during execution of SQL statement
-                        echo "Error: " . $conn->error;
-                    }
-                    $stmt->close(); // Close prepared statement
-                }
-            }
-                ?>
+                            <?php
+                            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                                if (isset($_POST['submit'])) {
+                                    date_default_timezone_set("Asia/Karachi");
+                                    $time = date("Y-m-d h:i:sa");
+                                    $id = $_POST['id'];
+                                    $feedback = $_POST['feedback'];
+
+                                    // Define upload directory and ensure it exists
+                                    $uploads_directory = "../Uploads/";
+                                    if (!is_dir($uploads_directory)) {
+                                        mkdir($uploads_directory, 0755, true); // Create directory if it doesn't exist
+                                    }
+
+                                    // Check if AdminPicture is set and uploaded
+                                    $picture_path = "NULL"; // Default value
+                                    if (isset($_FILES['AdminPicture']) && $_FILES['AdminPicture']['error'] === UPLOAD_ERR_OK) {
+                                        $picture = $_FILES['AdminPicture']['name'];
+                                        $temp_file = $_FILES['AdminPicture']['tmp_name'];
+                                        $upload_path = $uploads_directory . basename($picture);
+
+                                        // Validate file type and size
+                                        $allowed_types = ['image/jpeg', 'image/png', 'application/pdf'];
+                                        $max_size = 5 * 1024 * 1024; // 5MB
+                                        $file_type = mime_content_type($temp_file);
+                                        $file_size = $_FILES['AdminPicture']['size'];
+
+                                        if (in_array($file_type, $allowed_types) && $file_size <= $max_size) {
+                                            // Move uploaded file to specified directory
+                                            if (move_uploaded_file($temp_file, $upload_path)) {
+                                                $picture_path = $upload_path;
+                                            } else {
+                                                echo "<script>alert('Error: Failed to move uploaded file. Check directory permissions.');</script>";
+                                            }
+                                        } else {
+                                            echo "<script>alert('Error: Invalid file type or size. Allowed types: JPEG, PNG, PDF. Max size: 5MB.');</script>";
+                                        }
+                                    } elseif ($_FILES['AdminPicture']['error'] !== UPLOAD_ERR_NO_FILE) {
+                                        // Handle other file upload errors
+                                        echo "<script>alert('Error: File upload failed with error code " . $_FILES['AdminPicture']['error'] . ".');</script>";
+                                    }
+
+                                    // Update the database with feedback and picture path
+                                    $sql = "UPDATE query SET ans=?, ansPicture=?, f_time=? WHERE id=?";
+                                    $stmt = $conn->prepare($sql);
+                                    $stmt->bind_param("sssi", $feedback, $picture_path, $time, $id);
+
+                                    if ($stmt->execute()) {
+                                        // Redirect to querypending.php with appropriate page number
+                                        if (isset($pageno)) {
+                                            header('location: querypending.php?pageno=' . $pageno);
+                                        } else {
+                                            header('location: querypending.php');
+                                        }
+                                        exit();
+                                    } else {
+                                        echo "<script>alert('Error: " . addslashes($conn->error) . "');</script>";
+                                    }
+                                    $stmt->close();
+                                }
+                            }
+                            ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -377,43 +389,19 @@ if(isset($_SESSION['user_name'],$_SESSION['user_access']))
                 <li class="page-item"><a class="page-link " href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($total_pages); } ?>" >Last</a></li>
             </ul>
         </nav>
-<!--
-        <ul class="pagination">
-            <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
-                <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
-            </li>
-            <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
-                <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
-            </li>
-        </ul>
--->
     </div>
-            </div>
         </div>
-    
     </div>
     
     <script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-<!-- 	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/custom.js"></script> -->
-
 </body>
 </html>
 
-
-
 <?php
 mysqli_close($conn);
-
 }
-
 else{
   header("Location: index.php");
 }
-
 ?>
