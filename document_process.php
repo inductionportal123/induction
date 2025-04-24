@@ -19,7 +19,7 @@ if(isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             $exedelete = mysqli_query($conn, $delete);
         }
 
-        $validExtensions = ['jpg',  'JPG','jpeg', 'JPEG'];
+        $validExtensions = ['jpg',  'JPG','jpeg', 'JPEG','png', 'PNG'];
         $maxFileSize = 512000; // 500 KB
         $files = [
             'recipt_image' => 'recipt',

@@ -128,7 +128,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                     <form id="document_id" method="post" action="document_process.php" enctype="multipart/form-data" class="space-y-6">
                         <div>
                             <h4 class="text-teal-600 font-semibold mb-2">Upload Your Documents:</h4>
-                            <p class="text-red-600 text-sm">All files should be in <strong>JPG or JPEG format</strong> and less than <strong>500kb</strong>.</p>
+                            <p class="text-red-600 text-sm">All files should be in <strong>JPG, JPEG or PNG format</strong> and less than <strong>500kb</strong>.</p>
                         </div>
 
                         <!-- Bank Challan Receipt -->
