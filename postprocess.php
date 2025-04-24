@@ -36,10 +36,7 @@ $list = '';
          Please complete the Professional Degree section in your Qualification Section.';
     }
         else{
-            
-            
-             
-
+ 
           $opencheck = "SELECT nonteachingstaff.open_merit FROM `nonteachingstaff` WHERE nonteachingstaff.pid = '$post1'";
           $openexe = mysqli_query($conn, $opencheck);
           $opendata = mysqli_fetch_array($openexe);

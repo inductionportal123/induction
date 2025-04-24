@@ -146,9 +146,9 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <i class="fas fa-briefcase mr-2"></i> Post Information <span class="text-sm text-gray-500 ml-2">(* Mandatory Fields)</span>
                     </h3>
 
-     <!-- Category I: Teaching -->
+    <!-- Category I: Teaching (BPS-16) -->
 <div class="mb-6">
-    <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS 16-17) | زمرہ I: تدریسی عملہ</h4>
+    <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS-16) | زمرہ I: تدریسی عملہ</h4>
     <style>
         .checkbox-group {
             display: flex;
@@ -235,13 +235,14 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             // Convert eligible degrees to a string for the SQL query
             $eligible_degrees_str = "'" . implode("','", $eligible_degrees) . "'";
 
-            // Query to fetch eligible posts
+            // Query to fetch eligible posts for BPS-16
             $newquery = $user_gender == 'transgender'
                 ? "SELECT p.pid, p.name, p.gender, p.bps 
                    FROM posts p
                    JOIN post_details pd ON p.pid = pd.pid
                    WHERE p.cat = 3 
                    AND pd.req_deg IN ($eligible_degrees_str)
+                   AND p.bps = 16
                    ORDER BY p.bps ASC"
                 : "SELECT p.pid, p.name, p.gender, p.bps 
                    FROM posts p
@@ -249,6 +250,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                    WHERE p.cat = 3 
                    AND pd.req_deg IN ($eligible_degrees_str)
                    AND (p.gender = '$user_gender' OR p.gender = 'both') 
+                   AND p.bps = 16
                    ORDER BY p.bps ASC";
 
             $newexe = mysqli_query($conn, $newquery);
@@ -260,7 +262,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                 }
                 echo '</div>';
             } else {
-                echo '<p class="text-red-600">No posts available for your qualifications.</p>';
+                echo '<p class="text-red-600">No BPS-16 posts available for your qualifications.</p>';
             }
         }
     } else {
@@ -269,7 +271,10 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     ?>
 </div>
 
-                
+<!-- Category I: Teaching (BPS-17) -->
+<div class="mb-6">
+    <h4 class="text-teal-600 font-semibold mb-2">Category I: Teaching (BPS-17) | زمرہ I: تدریسی عملہ</h4>
+   
                 </div>
 
                 <!-- Test City -->
