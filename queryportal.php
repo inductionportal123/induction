@@ -198,7 +198,7 @@ $stmt->close();
             <?php
             $query2 = "SELECT q.*, pi.basic_full_name 
                       FROM query q
-                      INNER JOIN per_info pi ON q.said = pi.said 
+                      INNER JOIN acount_details ad ON q.said = ad.id 
                       WHERE q.said = ? 
                       ORDER BY q.q_time DESC";
             $stmt = $conn->prepare($query2);
