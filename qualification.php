@@ -175,22 +175,22 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                 <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
 
                 <!-- Academic Information -->
-                <div class="card p-6 rounded-lg">
-                    <h3 class="text-lg font-semibold text-teal-700 mb-4 flex items-center">
-                        <i class="fas fa-graduation-cap mr-2"></i> Academic Information 
-                        <span class="text-sm text-gray-500 ml-2">(* At least one academic qualification is required)</span>
-
-                        Please enter only completed degrees in the Academic Information and Professional
-                        Qualification sections.Degrees that are in progress are not eligible
-
-                    </h3>
+<div class="card p-6 rounded-lg">
+    <h3 class="text-lg font-semibold text-teal-700 mb-4 flex items-center">
+        <i class="fas fa-graduation-cap mr-2"></i> Academic Information
+        <span class="text-sm text-gray-500 ml-2">(* At least one academic qualification is required)</span>
+    </h3>
+    <p class="text-gray-800 font-semibold bg-yellow-100 p-4 rounded-md border-l-4 border-yellow-500 mb-4">
+        Please enter only completed degrees in the Academic Information and Professional Qualification sections. Degrees in progress are not eligible.
+    </p>
+</div>
                     <div class="overflow-x-auto">
                         <table class="min-w-full">
                             <thead class="bg-teal-100">
                                 <tr>
                                     <th class="text-left text-teal-800">Level</th>
                                     <th class="text-left text-teal-800">Certificate/Degree</th>
-                                    <th class="text-left text-teal-800">Specialization</th>
+                                    <th class="text-left text-teal-800">Subject</th>
                                     <th class="text-left text-teal-800">Grade/CGPA</th>
                                     <th class="text-left text-teal-800">Board/University</th>
                                 </tr>
