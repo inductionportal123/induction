@@ -53,6 +53,5 @@ if ($exe1) {
     echo 2; // Insert failed
 }
 
-mysqli_close($conn);
-ob_end_clean();
+
 ?>
