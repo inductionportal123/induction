@@ -10,18 +10,26 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
     $user = $_SESSION['u_name'];
     $userid = $_SESSION['u_id'];
 
-    $fee_detail_query = "SELECT * FROM `fee_detial` WHERE s_id = '$userid'";
-    $ex2 = mysqli_query($conn, $fee_detail_query);
-    $ro2 = mysqli_fetch_array($ex2);
+    // Use prepared statements to prevent SQL injection
+    $fee_detail_query = "SELECT * FROM `fee_detail` WHERE s_id = ?";
+    $stmt = mysqli_prepare($conn, $fee_detail_query);
+    mysqli_stmt_bind_param($stmt, "s", $userid);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $ro2 = mysqli_fetch_array($result);
+    mysqli_stmt_close($stmt);
 
-    $que = "SELECT * FROM `emp_document` WHERE said = '$userid'";
-    $ex = mysqli_query($conn, $que);
-    $ro = mysqli_fetch_array($ex);
-   
-    $rowcount = mysqli_num_rows($ex);
+    $que = "SELECT * FROM `emp_document` WHERE said = ?";
+    $stmt = mysqli_prepare($conn, $que);
+    mysqli_stmt_bind_param($stmt, "s", $userid);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $ro = mysqli_fetch_array($result);
+    $rowcount = mysqli_num_rows($result);
+    mysqli_stmt_close($stmt);
 
     if ($rowcount >= 1) {
-        $profile_picture=$ro['image'];
+        $profile_picture = isset($ro['image']) ? $ro['image'] : '';
         $dataset = "ok";
         $documentmesg = "You have successfully uploaded documents.";
     }
@@ -54,18 +62,20 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         .progress-bar { height: 4px; background: #14b8a6; transition: width 0.5s ease; }
         .file-preview { max-width: 100px; max-height: 100px; object-fit: cover; border-radius: 4px; border: 1px solid #e5e7eb; }
         .uploaded-image { max-width: 150px; max-height: 150px; object-fit: cover; border-radius: 4px; border: 1px solid #e5e7eb; }
+        .image-preview { max-width: 150px; max-height: 150px; object-fit: cover; border-radius: 4px; border: 1px solid #e5e7eb; }
     </style>
 </head>
 <body class="bg-stone-50 font-sans antialiased">
     <!-- Header -->
-     <?php include 'header.php'; ?>
+    <?php include 'header.php'; ?>
 
-  <?php include 'sidebar.php'; ?>
+    <!-- Sidebar -->
+    <?php include 'sidebar.php'; ?>
+
     <!-- Main Content -->
     <main class="p-8 pt-24 w-full max-w-7xl mx-auto md:ml-72">
         <div class="bg-white p-8 rounded-xl shadow-lg">
-
-                    <?php include 'registration_form.php'; ?>
+            <?php include 'registration_form.php'; ?>
 
             <!-- Document Upload Content -->
             <div class="card p-6 rounded-lg">
@@ -73,7 +83,6 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                     <i class="fas fa-file-upload mr-2"></i> Upload Documents | دستاویزات اپ لوڈ کریں
                 </h3>
 
-            
                 <?php if (!$ro2) { ?>
                     <!-- Transaction Details Form -->
                     <form action="storeTransaction.php" method="POST" class="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md space-y-6">
@@ -91,7 +100,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                             </select>
                         </div>
                         <p class="text-xs text-gray-600">
-                            <strong>Note:</strong> 
+                            <strong>Note:</strong>
                             - For UBL branch payments, enter the <strong>SEQ number</strong>.<br>
                             - For mobile banking (e.g., EasyPaisa, JazzCash), provide the <strong>account number</strong>.<br>
                             - For other bank apps, provide the <strong>account number</strong> used for the transfer.
@@ -133,15 +142,25 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 
                         <!-- Bank Challan Receipt -->
                         <?php
-                        $postid = "SELECT post_apply.post_apply FROM post_apply WHERE post_apply.said='$userid'";
-                        $idexe = mysqli_query($conn, $postid);
-                        $iddata = mysqli_fetch_array($idexe);
-                        $ppid = $iddata['post_apply'];
+                        $postid = "SELECT post_apply.post_apply FROM post_apply WHERE post_apply.said = ?";
+                        $stmt = mysqli_prepare($conn, $postid);
+                        mysqli_stmt_bind_param($stmt, "s", $userid);
+                        mysqli_stmt_execute($stmt);
+                        $result = mysqli_stmt_get_result($stmt);
+                        $iddata = mysqli_fetch_array($result);
+                        mysqli_stmt_close($stmt);
+
+                        $ppid = isset($iddata['post_apply']) ? $iddata['post_apply'] : '';
                         $str_arr = explode(",", $ppid);
                         foreach ($str_arr as $postids) {
-                            $postapply = "SELECT SUM(fee_slot.fee) AS total FROM fee_slot WHERE fee_slot.post_id ='$postids'";
-                            $postexe = mysqli_query($conn, $postapply);
-                            $postdata = mysqli_fetch_array($postexe);
+                            $postapply = "SELECT SUM(fee_slot.fee) AS total FROM fee_slot WHERE fee_slot.post_id = ?";
+                            $stmt = mysqli_prepare($conn, $postapply);
+                            mysqli_stmt_bind_param($stmt, "s", $postids);
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+                            $postdata = mysqli_fetch_array($result);
+                            mysqli_stmt_close($stmt);
+
                             if ($postdata['total'] > 0) {
                         ?>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
@@ -154,7 +173,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                     </div>
                                     <div class="flex items-center space-x-4">
                                         <img id="recipti" src="#" alt="Receipt Preview" class="file-preview hidden">
-                                        <?php if (isset($ro['recipt'])) { ?>
+                                        <?php if (isset($ro['recipt']) && $ro['recipt']) { ?>
                                             <img src="<?php echo htmlspecialchars($ro['recipt']); ?>" alt="Uploaded Receipt" class="uploaded-image">
                                         <?php } ?>
                                     </div>
@@ -172,7 +191,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                             <input type="file" name="passport_image" id="passport_images" onchange="passport1(this);" class="w-full p-2 border rounded-md" <?php echo isset($ro['image']) ? '' : 'required'; ?>>
                             <div class="flex items-center space-x-4">
                                 <img id="passporti" src="#" alt="Passport Preview" class="file-preview hidden">
-                                <?php if (isset($ro['image'])) { ?>
+                                <?php if (isset($ro['image']) && $ro['image']) { ?>
                                     <img src="<?php echo htmlspecialchars($ro['image']); ?>" alt="Uploaded Passport" class="uploaded-image">
                                 <?php } ?>
                             </div>
@@ -185,7 +204,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                             <input type="file" name="cnic_image" id="cnic_images" onchange="cnic1(this);" class="w-full p-2 border rounded-md" <?php echo isset($ro['cnic']) ? '' : 'required'; ?>>
                             <div class="flex items-center space-x-4">
                                 <img id="cnici" src="#" alt="CNIC Preview" class="file-preview hidden">
-                                <?php if (isset($ro['cnic'])) { ?>
+                                <?php if (isset($ro['cnic']) && $ro['cnic']) { ?>
                                     <img src="<?php echo htmlspecialchars($ro['cnic']); ?>" alt="Uploaded CNIC" class="uploaded-image">
                                 <?php } ?>
                             </div>
@@ -195,11 +214,14 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <!-- Professional Degree (Conditional) -->
                         <?php
                         foreach ($str_arr as $postids) {
-                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = '$postids'";
-                            $postexe = mysqli_query($conn, $postapply);
-                            $postrow = mysqli_num_rows($postexe);
+                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = ?";
+                            $stmt = mysqli_prepare($conn, $postapply);
+                            mysqli_stmt_bind_param($stmt, "s", $postids);
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+                            $postrow = mysqli_num_rows($result);
                             if ($postrow > 0) {
-                                while ($postdata = mysqli_fetch_array($postexe)) {
+                                while ($postdata = mysqli_fetch_array($result)) {
                                     if (in_array($postdata['name'], ['Librarian', 'Assistant Librarian', 'Elementary School Teacher', 'Library Assistant'])) {
                         ?>
                                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
@@ -210,7 +232,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                             <input type="file" name="pdegree_image" id="pdegree_images" onchange="pdegree1(this);" class="w-full p-2 border rounded-md" <?php echo isset($ro['professional_degree']) ? '' : 'required'; ?>>
                                             <div class="flex items-center space-x-4">
                                                 <img id="pdegreei" src="#" alt="Professional Degree Preview" class="file-preview hidden">
-                                                <?php if (isset($ro['professional_degree'])) { ?>
+                                                <?php if (isset($ro['professional_degree']) && $ro['professional_degree']) { ?>
                                                     <img src="<?php echo htmlspecialchars($ro['professional_degree']); ?>" alt="Uploaded Professional Degree" class="uploaded-image">
                                                 <?php } ?>
                                             </div>
@@ -221,17 +243,21 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                     }
                                 }
                             }
+                            mysqli_stmt_close($stmt);
                         }
                         ?>
 
                         <!-- Driving License (Conditional) -->
                         <?php
                         foreach ($str_arr as $postids) {
-                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = '$postids'";
-                            $postexe = mysqli_query($conn, $postapply);
-                            $postrow = mysqli_num_rows($postexe);
+                            $postapply = "SELECT posts.name FROM posts WHERE posts.pid = ?";
+                            $stmt = mysqli_prepare($conn, $postapply);
+                            mysqli_stmt_bind_param($stmt, "s", $postids);
+                            mysqli_stmt_execute($stmt);
+                            $result = mysqli_stmt_get_result($stmt);
+                            $postrow = mysqli_num_rows($result);
                             if ($postrow > 0) {
-                                while ($postdata = mysqli_fetch_array($postexe)) {
+                                while ($postdata = mysqli_fetch_array($result)) {
                                     if ($postdata['name'] == 'Driver') {
                         ?>
                                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
@@ -242,7 +268,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                             <input type="file" name="ddegree_image" id="ddegree_images" onchange="ddegree1(this);" class="w-full p-2 border rounded-md" <?php echo isset($ro['driving_license']) ? '' : 'required'; ?>>
                                             <div class="flex items-center space-x-4">
                                                 <img id="ddegreei" src="#" alt="Driving License Preview" class="file-preview hidden">
-                                                <?php if (isset($ro['driving_license'])) { ?>
+                                                <?php if (isset($ro['driving_license']) && $ro['driving_license']) { ?>
                                                     <img src="<?php echo htmlspecialchars($ro['driving_license']); ?>" alt="Uploaded Driving License" class="uploaded-image">
                                                 <?php } ?>
                                             </div>
@@ -253,6 +279,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                     }
                                 }
                             }
+                            mysqli_stmt_close($stmt);
                         }
                         ?>
 
@@ -260,13 +287,13 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <div class="flex justify-between items-center">
                             <div id="response" class="text-sm">
                                 <?php
-                                if (isset($_GET['size']) && $_GET['size'] == 'false') echo "File size is greater than 1MB.";
-                                if (isset($_GET['type']) && $_GET['type'] == 'false') echo "Upload only JPG files.";
+                                if (isset($_GET['size']) && $_GET['size'] == 'false') echo "File size is greater than 100KB.";
+                                if (isset($_GET['type']) && $_GET['type'] == 'false') echo "Upload only JPG, JPEG, or PNG files.";
                                 ?>
                             </div>
                             <div class="flex items-center space-x-4">
                                 <?php if (isset($documentmesg)) { ?>
-                                    <p class="text-green-600 font-semibold flex items-center"><i class="fas fa-check-circle mr-2"></i><?php echo $documentmesg; ?></p>
+                                    <p class="text-green-600 font-semibold flex items-center"><i class="fas fa-check-circle mr-2"></i><?php echo htmlspecialchars($documentmesg); ?></p>
                                 <?php } ?>
                                 <button type="submit" id="submit_btn" class="px-6 py-3 bg-teal-700 text-white rounded-lg hover:bg-teal-600 transition-all disabled:bg-gray-400 disabled:cursor-not-allowed" <?php echo isset($dataset) ? 'disabled' : ''; ?>>
                                     Save & Next <i class="fas fa-arrow-right ml-2"></i>
@@ -277,6 +304,42 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                 <?php } ?>
             </div>
         </div>
+
+        <!-- Display Uploaded Images -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <?php if (!empty($ro['image'])) { ?>
+                <div class="text-center">
+                    <h5 class="text-gray-700 font-semibold mb-2">Uploaded Profile Picture:</h5>
+                    <img src="<?php echo htmlspecialchars($ro['image']); ?>" alt="Profile Picture" class="image-preview mx-auto" onerror="this.src='assets/no-image.png';">
+                </div>
+            <?php } else { ?>
+                <div class="text-center">
+                    <h3 class="text-red-600 font-semibold">No image found. Please upload your Profile Picture.</h3>
+                </div>
+            <?php } ?>
+
+            <?php if (!empty($ro['recipt'])) { ?>
+                <div class="text-center">
+                    <h5 class="text-gray-700 font-semibold mb-2">Uploaded Receipt:</h5>
+                    <img src="<?php echo htmlspecialchars($ro['recipt']); ?>" alt="Receipt" class="image-preview mx-auto" onerror="this.src='assets/no-image.png';">
+                </div>
+            <?php } else { ?>
+                <div class="text-center">
+                    <h3 class="text-red-600 font-semibold">No image found. Please upload your receipt.</h3>
+                </div>
+            <?php } ?>
+
+            <?php if (!empty($ro['cnic'])) { ?>
+                <div class="text-center">
+                    <h5 class="text-gray-700 font-semibold mb-2">Uploaded Document (CNIC):</h5>
+                    <img src="<?php echo htmlspecialchars($ro['cnic']); ?>" alt="CNIC" class="image-preview mx-auto" onerror="this.src='assets/no-image.png';">
+                </div>
+            <?php } else { ?>
+                <div class="text-center">
+                    <h3 class="text-red-600 font-semibold">No image found. Please upload your CNIC.</h3>
+                </div>
+            <?php } ?>
+        </div>
     </main>
 
     <!-- Scripts -->
@@ -285,10 +348,10 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         const sidebar = document.getElementById('sidebar');
         const toggle = document.getElementById('sidebar-toggle');
         const close = document.getElementById('sidebar-close');
-        toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
-        close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
-
-    
+        if (toggle && close) {
+            toggle.addEventListener('click', () => sidebar.classList.toggle('-translate-x-full'));
+            close.addEventListener('click', () => sidebar.classList.add('-translate-x-full'));
+        }
 
         // Transaction Detail Toggle
         $('#type').change(function() {
@@ -302,15 +365,15 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
         });
 
         // File Validation and Preview Functions
-        function validateFile(input, feedbackId, previewId, sizeLimit = 1000000) {
+        function validateFile(input, feedbackId, previewId, sizeLimit = 100000) {
             const file = input.files[0];
             const feedback = $(`#${feedbackId}`);
             const submitBtn = $('#submit_btn');
-            if (file && file.size <= sizeLimit && file.name.match(/.(jpg|JPG|jpeg|JPEG|png|PNG)$/i)) {
+            if (file && file.size <= sizeLimit && file.name.match(/.(jpg|jpeg|png)$/i)) {
                 feedback.text("Image uploaded successfully.").css({ color: 'green', fontSize: '0.875rem' });
                 submitBtn.prop('disabled', false);
             } else {
-                feedback.text("Image not valid/uploaded (must be JPG/JPEG, < 1MB).").css({ color: 'red', fontSize: '0.875rem' });
+                feedback.text("Image not valid/uploaded (must be JPG/JPEG/PNG, < 100KB).").css({ color: 'red', fontSize: '0.875rem' });
                 submitBtn.prop('disabled', true);
             }
         }
@@ -360,5 +423,6 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 <?php
 } else {
     header("Location: index.php");
+    exit;
 }
 ?>
