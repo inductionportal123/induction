@@ -22,6 +22,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
 
     if ($rowcount >= 1) {
         $profile_picture=$ro['image'];
+        $recipt=$ro['recipt'];
+        $cnic=$ro['cnic'];
         $dataset = "ok";
         $documentmesg = "You have successfully uploaded documents.";
     }
@@ -154,8 +156,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                                     </div>
                                     <div class="flex items-center space-x-4">
                                         <img id="recipti" src="#" alt="Receipt Preview" class="file-preview hidden">
-                                        <?php if (isset($ro['recipt'])) { ?>
-                                            <img src="<?php echo htmlspecialchars($ro['recipt']); ?>" alt="Uploaded Receipt" class="uploaded-image">
+                                        <?php if (isset($recipt)) { ?>
+                                            <img src="<?php echo htmlspecialchars($recipt); ?>" alt="Uploaded Receipt" class="uploaded-image">
                                         <?php } ?>
                                     </div>
                                 </div>
@@ -169,11 +171,14 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                         <!-- Passport Size Image -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
                             <label class="form-label">Passport Size Image:</label>
+
+                           
+                            
                             <input type="file" name="passport_image" id="passport_images" onchange="passport1(this);" class="w-full p-2 border rounded-md" <?php echo isset($ro['image']) ? '' : 'required'; ?>>
                             <div class="flex items-center space-x-4">
                                 <img id="passporti" src="#" alt="Passport Preview" class="file-preview hidden">
-                                <?php if (isset($ro['image'])) { ?>
-                                    <img src="<?php echo htmlspecialchars($ro['image']); ?>" alt="Uploaded Passport" class="uploaded-image">
+                                <?php if (isset($profile_picture)) { ?>
+                                    <img src="<?php echo htmlspecialchars($profile_picture); ?>" alt="Uploaded Passport" class="uploaded-image">
                                 <?php } ?>
                             </div>
                         </div>
@@ -185,8 +190,8 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
                             <input type="file" name="cnic_image" id="cnic_images" onchange="cnic1(this);" class="w-full p-2 border rounded-md" <?php echo isset($ro['cnic']) ? '' : 'required'; ?>>
                             <div class="flex items-center space-x-4">
                                 <img id="cnici" src="#" alt="CNIC Preview" class="file-preview hidden">
-                                <?php if (isset($ro['cnic'])) { ?>
-                                    <img src="<?php echo htmlspecialchars($ro['cnic']); ?>" alt="Uploaded CNIC" class="uploaded-image">
+                                <?php if (isset($cnic)) { ?>
+                                    <img src="<?php echo htmlspecialchars($cnic); ?>" alt="Uploaded CNIC" class="uploaded-image">
                                 <?php } ?>
                             </div>
                         </div>
@@ -278,41 +283,7 @@ if (isset($_SESSION['u_name'], $_SESSION['u_id'])) {
             </div>
         </div>
 
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-    <?php if (!empty($ro2['image'])) { ?>
-        <div class="text-center">
-            <h5 class="text-gray-700 font-semibold mb-2">Uploaded Profile Picture:</h5>
-            <img src="<?php echo htmlspecialchars($ro2['image']); ?>" alt="Profile Picture" class="image-preview mx-auto" onerror="this.src='assets/no-image.png';">
-        </div>
-    <?php } else { ?>
-        <div class="text-center">
-            <h3 class="text-red-600 font-semibold">No image found. Please upload your Profile Picture.</h3>
-        </div>
-    <?php } ?>
-
-    <?php if (!empty($ro2['recipt'])) { ?>
-        <div class="text-center">
-            <h5 class="text-gray-700 font-semibold mb-2">Uploaded Receipt:</h5>
-            <img src="<?php echo htmlspecialchars($ro2['recipt']); ?>" alt="Receipt" class="image-preview mx-auto" onerror="this.src='assets/no-image.png';">
-        </div>
-    <?php } else { ?>
-        <div class="text-center">
-            <h3 class="text-red-600 font-semibold">No image found. Please upload your receipt.</h3>
-        </div>
-    <?php } ?>
-
-    <?php if (!empty($ro2['cnic'])) { ?>
-        <div class="text-center">
-            <h5 class="text-gray-700 font-semibold mb-2">Uploaded Document (CNIC):</h5>
-            <img src="<?php echo htmlspecialchars($ro2['cnic']); ?>" alt="CNIC" class="image-preview mx-auto" onerror="this.src='assets/no-image.png';">
-        </div>
-    <?php } else { ?>
-        <div class="text-center">
-            <h3 class="text-red-600 font-semibold">No image found. Please upload your CNIC.</h3>
-        </div>
-    <?php } ?>
-</div>
+        
     </main>
 
     <!-- Scripts -->
